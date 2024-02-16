@@ -2,7 +2,7 @@
 
 namespace game {
 
-Stage::Stage(sf::RenderWindow* window) : window_(window), texture(drawable::Texture("assets/sprites/stefan-head2.png")) { //: Scene(window) {
+Stage::Stage(sf::RenderWindow* window) : Scene(window), texture(drawable::Texture("assets/sprites/stefan-head2.png")) {
 	drawable::Sprite sprite = drawable::Sprite("example");
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(0, 0));
@@ -18,8 +18,7 @@ bool Stage::update() {
 }
 
 void Stage::render() {
-	//sf::RenderWindow* window = getWindow();
-	sf::RenderWindow* window = window_;
+	sf::RenderWindow* window = getWindow();
 
 	for (int x = 0; x < window->getSize().x / sprites.at(0).getLocalBounds().getSize().x; ++x) {
 		for (int y = 0; y < window->getSize().y / sprites.at(0).getLocalBounds().getSize().y; ++y) {

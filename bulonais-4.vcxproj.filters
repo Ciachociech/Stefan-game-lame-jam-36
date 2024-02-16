@@ -107,10 +107,10 @@
     <ClInclude Include="include\audio\Music.h">
       <Filter>Pliki nagłówkowe\audio</Filter>
     </ClInclude>
-    <ClInclude Include="src\game\Scene.h">
+    <ClInclude Include="include\game\Stage.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
-    <ClInclude Include="include\game\Stage.h">
+    <ClInclude Include="include\game\Scene.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
   </ItemGroup>

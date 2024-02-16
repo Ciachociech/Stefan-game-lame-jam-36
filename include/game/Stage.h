@@ -14,18 +14,17 @@
 
 namespace game {
 
-class Stage { //: public Scene {
+class Stage : public Scene {
 
 private:
 	std::vector<drawable::Sprite> sprites;
 	drawable::Texture texture;	// TEMP
-	sf::RenderWindow* window_;	// TEMP
 public:
 	Stage(sf::RenderWindow* window);
 
-	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput);// override;
-	bool update();// override;
-	void render();// override;
+	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) override;
+	bool update() override;
+	void render() override;
 };
 
 }
