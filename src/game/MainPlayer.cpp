@@ -4,8 +4,10 @@ namespace game {
 
 MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png") {
 	sprite = &SolidObject::getSprite();
-	sprite->setPosition(sf::Vector2f(400, 240));
+	sprite->setPosition(sf::Vector2f(400, 360));
 	sprite->setOriginCenter();
+
+	hitbox = sprite->getGlobalBounds();
 }
 
 MainPlayer::~MainPlayer() {}
@@ -33,6 +35,7 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 	}
 
 	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + moveX, sprite->getPosition().y + moveY));
+	hitbox = sprite->getGlobalBounds();
 }
 
 void MainPlayer::update() {}

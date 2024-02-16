@@ -149,6 +149,7 @@
     <ClCompile Include="src\drawable\Sprite.cpp" />
     <ClCompile Include="src\drawable\Text.cpp" />
     <ClCompile Include="src\drawable\Texture.cpp" />
+    <ClCompile Include="src\game\Floor.cpp" />
     <ClCompile Include="src\game\MainPlayer.cpp" />
     <ClCompile Include="src\game\Stage.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="include\drawable\Sprite.h" />
     <ClInclude Include="include\drawable\Text.h" />
     <ClInclude Include="include\drawable\Texture.h" />
+    <ClInclude Include="include\game\Floor.h" />
     <ClInclude Include="include\game\MainPlayer.h" />
     <ClInclude Include="include\game\Object.h" />
     <ClInclude Include="include\game\Scene.h" />
@@ -175,6 +177,7 @@
   <ItemGroup>
     <Image Include="assets\sprites\grid-part.png" />
     <Image Include="assets\sprites\stefan-head2.png" />
+    <Image Include="assets\sprites\WIP32x32.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
