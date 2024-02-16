@@ -3,27 +3,17 @@
 
 #include <string>
 
-#include <drawable/Sprite.h>
-#include <drawable/Texture.h>
-#include <window/JoystickInput.h>
-#include <window/KeyboardInput.h>
+#include <game/Object.h>
 
 namespace game {
 
-class SolidObject {
+class SolidObject : public Object {
 private:
-	drawable::Sprite sprite;
-	drawable::Texture texture;
-
-	std::string tag_;
 protected:
-	SolidObject(std::string tag, std::string texturePath) : sprite(tag + "Sprite"), texture(texturePath) { sprite.setTexture(texture); }
-
-	drawable::Sprite& getSprite() { return sprite; }
 public:
-	virtual void update() = 0;
+	SolidObject(std::string tag, std::string texturePath) : Object(tag, texturePath) {}
 
-	const std::string& getTag() { return tag_; }
+	virtual void update() = 0;
 };
 
 }

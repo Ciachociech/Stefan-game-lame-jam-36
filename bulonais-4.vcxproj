@@ -164,6 +164,7 @@
     <ClInclude Include="include\drawable\Text.h" />
     <ClInclude Include="include\drawable\Texture.h" />
     <ClInclude Include="include\game\MainPlayer.h" />
+    <ClInclude Include="include\game\Object.h" />
     <ClInclude Include="include\game\Scene.h" />
     <ClInclude Include="include\game\SolidObject.h" />
     <ClInclude Include="include\game\Stage.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="include\window\WindowInstance.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\sprites\grid-part.png" />
     <Image Include="assets\sprites\stefan-head2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

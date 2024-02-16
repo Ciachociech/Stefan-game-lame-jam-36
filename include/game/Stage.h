@@ -1,6 +1,7 @@
 #ifndef GAME_STAGE_H_
 #define GAME_STAGE_H_
 
+#include <memory>
 #include <vector>
 
 #include <SFML/Graphics.hpp>
@@ -9,17 +10,21 @@
 
 #include <drawable/Sprite.h>
 #include <drawable/Texture.h>
+#include <game/Object.h>
 #include <game/MainPlayer.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
 namespace game {
 
+namespace {
+	using ObjectUptr = std::unique_ptr<Object>;
+}
+
 class Stage : public Scene {
 
 private:
-	std::vector<drawable::Sprite> sprites;
-	drawable::Texture texture;	// TEMP
+	std::vector<ObjectUptr> objects;
 	MainPlayer mainPlayer;
 public:
 	Stage(sf::RenderWindow* window);

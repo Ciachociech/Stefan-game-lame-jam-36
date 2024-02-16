@@ -15,8 +15,4 @@ void MainPlayer::update() {
 	//TODO
 }
 
-const drawable::Sprite& MainPlayer::getSprite() {
-	return SolidObject::getSprite();
-}
-
 }

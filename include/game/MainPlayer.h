@@ -16,8 +16,6 @@ public:
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput);
 	void update() override;
-
-	const drawable::Sprite& getSprite();
 };
 
 }
