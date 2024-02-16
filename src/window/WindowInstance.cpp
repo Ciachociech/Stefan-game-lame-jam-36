@@ -2,7 +2,7 @@
 
 namespace window {
 	
-WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none) {
+WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage() {
     sf::Image icon;
     icon.loadFromFile("assets/sprites/stefan-head2.png");
     this->window.setIcon(32, 32, icon.getPixelsPtr());
@@ -32,6 +32,16 @@ int WindowInstance::loop() {
             /*
             add cases which are connected with ProgramStates
             */
+            case ProgramState::none: {
+                state = ProgramState::stage;
+                stage = std::make_unique<game::Stage>(&this->window);
+                break;
+            }
+            case ProgramState::stage: {
+                stage->processInput(keyboardInput, joystickInput);
+                stage->update();
+                stage->render();
+            }
             default: {
                 break;
             }
