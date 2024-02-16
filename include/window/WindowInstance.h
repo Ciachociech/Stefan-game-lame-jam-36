@@ -1,16 +1,19 @@
 #ifndef WINDOW_WINDOWINSTANCE_H_
 #define WINDOW_WINDOWINSTANCE_H_
 
+#include <memory>
 #include <string>
 
 #include <SFML/Graphics.hpp>
 
+//#include <game/Scene.h>
+#include <game/Stage.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
 namespace window {
 
-enum class ProgramState { none, /* add states like titlescreen, menu, game and gameover */ };
+enum class ProgramState { none, stage /* add states like titlescreen, menu, game and gameover */ };
 
 class WindowInstance {
 private:
@@ -19,6 +22,8 @@ private:
 
 	JoystickInput joystick;
 	KeyboardInput keyboard;
+
+	std::unique_ptr<game::Stage> stage;
 
 	int waitFrames = 0;
 public:
