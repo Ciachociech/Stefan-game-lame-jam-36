@@ -2,8 +2,17 @@
 
 namespace game {
 
-Stage::Stage(sf::RenderWindow* window) : Scene(window), objects(), mainPlayer() {
-	objects.push_back(std::make_unique<game::Object>("grid", "assets/sprites/grid-part.png"));
+Stage::Stage(sf::RenderWindow* window) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
+	const int gridX = grid.getSprite().getLocalBounds().getSize().x;
+	const int gridY = grid.getSprite().getLocalBounds().getSize().y;
+
+	int floorCounter = 0;
+	for (int x = 0; x < window->getSize().x / gridX; ++x) {
+		for (int y = 0; y < 4; ++y) {
+			floors.push_back(std::make_unique<Floor>(++floorCounter));
+			floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(x * gridX, (4 * y + 1) * gridY));
+		}
+	}
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
@@ -18,13 +27,17 @@ bool Stage::update() {
 void Stage::render() {
 	sf::RenderWindow* window = getWindow();
 
-	int gridX = objects.at(0)->getSprite().getLocalBounds().getSize().x;
-	int gridY = objects.at(0)->getSprite().getLocalBounds().getSize().y;
+	const int gridX = grid.getSprite().getLocalBounds().getSize().x;
+	const int gridY = grid.getSprite().getLocalBounds().getSize().y;
 	for (int x = 0; x < window->getSize().x / gridX; ++x) {
-		for (int y = 0; y < window->getSize().y / gridY; ++y) {
-			objects.at(0)->getSprite().setPosition(sf::Vector2f(x * gridX, y * gridY));
-			window->draw(objects.at(0)->getSprite());
+		for (int y = 1; y < window->getSize().y / gridY - 1; ++y) {
+			grid.getSprite().setPosition(sf::Vector2f(x * gridX, y * gridY));
+			window->draw(grid.getSprite());
 		}
+	}
+
+	for (const auto& floor : floors) {
+		window->draw(floor->getSprite());
 	}
 
 	window->draw(mainPlayer.getSprite());

@@ -10,21 +10,23 @@
 
 #include <drawable/Sprite.h>
 #include <drawable/Texture.h>
-#include <game/Object.h>
+#include <game/Floor.h>
 #include <game/MainPlayer.h>
+#include <game/Object.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
 namespace game {
 
 namespace {
-	using ObjectUptr = std::unique_ptr<Object>;
+	using FloorUptr = std::unique_ptr<Floor>;
 }
 
 class Stage : public Scene {
 
 private:
-	std::vector<ObjectUptr> objects;
+	std::vector<FloorUptr> floors;
+	Object grid;
 	MainPlayer mainPlayer;
 public:
 	Stage(sf::RenderWindow* window);

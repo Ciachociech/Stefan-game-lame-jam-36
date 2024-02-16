@@ -12,6 +12,7 @@ namespace game {
 class MainPlayer : public SolidObject {
 private:
 	drawable::Sprite* sprite;
+	sf::FloatRect hitbox;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
