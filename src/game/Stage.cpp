@@ -20,7 +20,6 @@ void Stage::render() {
 
 	int gridX = objects.at(0)->getSprite().getLocalBounds().getSize().x;
 	int gridY = objects.at(0)->getSprite().getLocalBounds().getSize().y;
-
 	for (int x = 0; x < window->getSize().x / gridX; ++x) {
 		for (int y = 0; y < window->getSize().y / gridY; ++y) {
 			objects.at(0)->getSprite().setPosition(sf::Vector2f(x * gridX, y * gridY));
