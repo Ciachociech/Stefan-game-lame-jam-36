@@ -2,18 +2,18 @@
 
 namespace game {
 
-Stage::Stage(sf::RenderWindow* window) : Scene(window), texture(drawable::Texture("assets/sprites/stefan-head2.png")) {
+Stage::Stage(sf::RenderWindow* window) : Scene(window), texture(drawable::Texture("assets/sprites/grid-part.png")), mainPlayer() {
 	drawable::Sprite sprite = drawable::Sprite("example");
 	sprite.setTexture(texture);
-	sprite.setPosition(sf::Vector2f(0, 0));
 	sprites.push_back(sprite);
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
-	//TODO
+	mainPlayer.processInput(keyboardInput, joystickInput);
 }
 
 bool Stage::update() {
+	mainPlayer.update();
 	return true;
 }
 
@@ -26,6 +26,8 @@ void Stage::render() {
 			window->draw(sprites.at(0));
 		}
 	}
+
+	window->draw(mainPlayer.getSprite());
 }
 
 
