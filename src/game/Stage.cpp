@@ -2,10 +2,10 @@
 
 namespace game {
 
-Stage::Stage(sf::RenderWindow* window) : window_(window) { //: Scene(window) {
-	drawable::Texture texture = drawable::Texture("assets/sprites/stefan-head2.png");
+Stage::Stage(sf::RenderWindow* window) : window_(window), texture(drawable::Texture("assets/sprites/stefan-head2.png")) { //: Scene(window) {
 	drawable::Sprite sprite = drawable::Sprite("example");
 	sprite.setTexture(texture);
+	sprite.setPosition(sf::Vector2f(0, 0));
 	sprites.push_back(sprite);
 }
 
@@ -23,6 +23,7 @@ void Stage::render() {
 
 	for (int x = 0; x < window->getSize().x / sprites.at(0).getLocalBounds().getSize().x; ++x) {
 		for (int y = 0; y < window->getSize().y / sprites.at(0).getLocalBounds().getSize().y; ++y) {
+			sprites.at(0).setPosition(sf::Vector2f(x * sprites.at(0).getLocalBounds().getSize().x, y * sprites.at(0).getLocalBounds().getSize().y));
 			window->draw(sprites.at(0));
 		}
 	}

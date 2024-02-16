@@ -8,6 +8,7 @@
 #include <game/Scene.h>
 
 #include <drawable/Sprite.h>
+#include <drawable/Texture.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
@@ -17,6 +18,7 @@ class Stage { //: public Scene {
 
 private:
 	std::vector<drawable::Sprite> sprites;
+	drawable::Texture texture;	// TEMP
 	sf::RenderWindow* window_;	// TEMP
 public:
 	Stage(sf::RenderWindow* window);

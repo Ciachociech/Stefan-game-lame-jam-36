@@ -168,6 +168,9 @@
     <ClInclude Include="include\window\WindowInstance.h" />
     <ClInclude Include="src\game\Scene.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\sprites\stefan-head2.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\sfml_system.redist.2.6.0\build\native\sfml_system.redist.targets" Condition="Exists('packages\sfml_system.redist.2.6.0\build\native\sfml_system.redist.targets')" />
