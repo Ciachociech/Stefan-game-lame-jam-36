@@ -165,6 +165,7 @@
     <ClInclude Include="include\drawable\Texture.h" />
     <ClInclude Include="include\game\MainPlayer.h" />
     <ClInclude Include="include\game\Scene.h" />
+    <ClInclude Include="include\game\SolidObject.h" />
     <ClInclude Include="include\game\Stage.h" />
     <ClInclude Include="include\window\JoystickInput.h" />
     <ClInclude Include="include\window\KeyboardInput.h" />
