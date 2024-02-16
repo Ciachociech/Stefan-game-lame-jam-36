@@ -11,8 +11,10 @@ namespace game {
 
 class MainPlayer : public SolidObject {
 private:
+	drawable::Sprite* sprite;
 public:
 	MainPlayer();
+	virtual ~MainPlayer();
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput);
 	void update() override;

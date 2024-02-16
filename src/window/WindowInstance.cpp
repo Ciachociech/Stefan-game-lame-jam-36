@@ -28,6 +28,8 @@ int WindowInstance::loop() {
             }
         }
 
+        this->window.clear(sf::Color(0, 0, 0, 255));
+
         switch (this->state) {
             /*
             add cases which are connected with ProgramStates
@@ -41,6 +43,7 @@ int WindowInstance::loop() {
                 stage->processInput(keyboardInput, joystickInput);
                 stage->update();
                 stage->render();
+                break;
             }
             default: {
                 break;
