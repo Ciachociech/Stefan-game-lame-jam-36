@@ -176,8 +176,10 @@
     <ClInclude Include="include\window\WindowInstance.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\sprites\beholder-eye.png" />
     <Image Include="assets\sprites\grid-part.png" />
     <Image Include="assets\sprites\stefan-head2.png" />
+    <Image Include="assets\sprites\stone-test.png" />
     <Image Include="assets\sprites\WIP32x32.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
