@@ -19,6 +19,8 @@ private:
 
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
+	bool collision{ false };
+
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
@@ -28,6 +30,8 @@ public:
 
 	const sf::Vector2f& getVelocity();
 	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
+
+	void jump(const sf::Vector2f position, int time);
 };
 
 }
