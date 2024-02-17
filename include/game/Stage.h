@@ -30,6 +30,7 @@ private:
 	MainPlayer mainPlayer;
 
 	void checkCollision();
+	void interpretStagePattern(const std::string* pattern);
 public:
 	Stage(sf::RenderWindow* window);
 
