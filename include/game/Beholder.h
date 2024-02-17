@@ -5,6 +5,8 @@
 
 #include <game/SolidObject.h>
 
+#include <SFML/Graphics.hpp>
+
 #include <drawable/Sprite.h>
 
 namespace game {
@@ -15,11 +17,16 @@ private:
 
 	drawable::Sprite raySprite;
 	drawable::Texture rayTexture;
+	std::vector<sf::FloatRect> rayHitboxes;
+	bool isRayActive{ false };
+	int rayCounter = 120;
 public:
 	Beholder(int counter, sf::Vector2f position);
 
 	void update() override;
 	drawable::Sprite& getRaySprite();
+	const std::vector<sf::FloatRect>& getRayHitboxes();
+	bool getIsRayActive();
 };
 
 }

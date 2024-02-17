@@ -53,6 +53,11 @@ void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, c
 bool Stage::update() {
 	checkCollision();
 	mainPlayer.update();
+
+	for (const auto& beholder : beholders) {
+		beholder->update();
+	}
+
 	return true;
 }
 
@@ -75,7 +80,9 @@ void Stage::render() {
 
 	for (const auto& beholder : beholders) {
 		window->draw(beholder->getSprite());
-		window->draw(beholder->getRaySprite());
+		if (beholder->getIsRayActive()) {
+			window->draw(beholder->getRaySprite());
+		}
 	}
 
 	window->draw(mainPlayer.getSprite());
