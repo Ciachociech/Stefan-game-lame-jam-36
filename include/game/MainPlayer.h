@@ -3,6 +3,9 @@
 
 #include <game/SolidObject.h>
 
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
 #include <drawable/Sprite.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>

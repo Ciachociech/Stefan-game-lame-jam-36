@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <SFML/Graphics.hpp>
+
 #include <game/Object.h>
 
 namespace game {
