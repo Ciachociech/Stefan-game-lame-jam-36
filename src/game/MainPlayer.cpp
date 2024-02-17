@@ -64,6 +64,7 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox) {
 		predictedMovement.y = 0.f;
 		velocity.y = 0.f;
 	}
+	/*
 	if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
 		predictedMovement.x = 0.f;
 		velocity.x = 0.f;
@@ -72,6 +73,7 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox) {
 		predictedMovement.x = 0.f;
 		velocity.x = 0.f;
 	}
+	*/
 }
 
 }
