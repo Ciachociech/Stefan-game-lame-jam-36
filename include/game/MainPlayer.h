@@ -13,6 +13,9 @@ class MainPlayer : public SolidObject {
 private:
 	drawable::Sprite* sprite;
 	sf::Vector2f velocity;
+
+	sf::Vector2f predictedMovement;
+	sf::FloatRect predictedHitbox;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
