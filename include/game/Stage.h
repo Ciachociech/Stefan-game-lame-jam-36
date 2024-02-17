@@ -28,6 +28,8 @@ private:
 	std::vector<FloorUptr> floors;
 	Object grid;
 	MainPlayer mainPlayer;
+
+	void checkCollision();
 public:
 	Stage(sf::RenderWindow* window);
 

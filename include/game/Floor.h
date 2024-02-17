@@ -7,7 +7,7 @@ namespace game {
 
 class Floor : public SolidObject {
 private:
-	sf::FloatRect hitbox;
+	bool isHitboxSet = false;
 public:
 	Floor(int counter);
 
