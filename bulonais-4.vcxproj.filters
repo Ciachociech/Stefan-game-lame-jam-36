@@ -81,6 +81,9 @@
     <ClCompile Include="src\game\MainPlayer.cpp">
       <Filter>Pliki źródłowe\game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Floor.cpp">
+      <Filter>Pliki źródłowe\drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\window\JoystickInput.h">
@@ -119,9 +122,24 @@
     <ClInclude Include="include\game\MainPlayer.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\game\Floor.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game\Object.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game\SolidObject.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\sprites\stefan-head2.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\grid-part.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\WIP32x32.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
   </ItemGroup>
