@@ -1,6 +1,20 @@
 #include <game/Stage.h>
 
 namespace game {
+	
+void Stage::checkCollision() {
+	if (mainPlayer.getHitbox().left < 0) {
+		mainPlayer.getSprite().setPosition(sf::Vector2f(mainPlayer.getSprite().getLocalBounds().getSize().x / 2, mainPlayer.getSprite().getPosition().y));
+	} else if (mainPlayer.getHitbox().left + mainPlayer.getHitbox().width > getWindow()->getSize().x) {
+		mainPlayer.getSprite().setPosition(sf::Vector2f(getWindow()->getSize().x - mainPlayer.getSprite().getLocalBounds().getSize().x / 2, mainPlayer.getSprite().getPosition().y));
+	}
+	
+	for (const auto& floor : floors) {
+		if (mainPlayer.getHitbox().intersects(floor->getHitbox())) {
+			mainPlayer.resolveCollisionWithWall(floor->getHitbox());
+		}
+	}
+}
 
 Stage::Stage(sf::RenderWindow* window) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
 	const int gridX = grid.getSprite().getLocalBounds().getSize().x;
@@ -20,7 +34,11 @@ void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, c
 }
 
 bool Stage::update() {
+	checkCollision();
 	mainPlayer.update();
+	for (const auto& floor : floors) {
+		floor->update();
+	}
 	return true;
 }
 

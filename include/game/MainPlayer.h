@@ -12,13 +12,16 @@ namespace game {
 class MainPlayer : public SolidObject {
 private:
 	drawable::Sprite* sprite;
-	sf::FloatRect hitbox;
+	sf::Vector2f velocity;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput);
 	void update() override;
+
+	const sf::Vector2f& getVelocity();
+	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
 };
 
 }
