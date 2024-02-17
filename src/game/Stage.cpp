@@ -1,5 +1,8 @@
 #include <game/Stage.h>
 
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+
 #include <game/StagePatterns.h>
 
 namespace game {
