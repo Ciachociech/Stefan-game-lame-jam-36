@@ -5,15 +5,21 @@
 
 #include <game/SolidObject.h>
 
+#include <drawable/Sprite.h>
+
 namespace game {
 
 class Beholder : public SolidObject {
 private:
+	drawable::Sprite* sprite;
 
+	drawable::Sprite raySprite;
+	drawable::Texture rayTexture;
 public:
-	Beholder(int counter);
+	Beholder(int counter, sf::Vector2f position);
 
 	void update() override;
+	drawable::Sprite& getRaySprite();
 };
 
 }

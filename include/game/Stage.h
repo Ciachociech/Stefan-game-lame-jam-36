@@ -10,6 +10,7 @@
 
 #include <drawable/Sprite.h>
 #include <drawable/Texture.h>
+#include <game/Beholder.h>
 #include <game/Floor.h>
 #include <game/MainPlayer.h>
 #include <game/Object.h>
@@ -20,12 +21,14 @@ namespace game {
 
 namespace {
 	using FloorUptr = std::unique_ptr<Floor>;
+	using BeholderUptr = std::unique_ptr<Beholder>;
 }
 
 class Stage : public Scene {
 
 private:
 	std::vector<FloorUptr> floors;
+	std::vector<BeholderUptr> beholders;
 	Object grid;
 	MainPlayer mainPlayer;
 

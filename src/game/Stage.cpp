@@ -43,6 +43,7 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 
 Stage::Stage(sf::RenderWindow* window) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
 	interpretStagePattern(pattern1);
+	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(384.f, 168.f)));
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
@@ -70,6 +71,11 @@ void Stage::render() {
 
 	for (const auto& floor : floors) {
 		window->draw(floor->getSprite());
+	}
+
+	for (const auto& beholder : beholders) {
+		window->draw(beholder->getSprite());
+		window->draw(beholder->getRaySprite());
 	}
 
 	window->draw(mainPlayer.getSprite());
