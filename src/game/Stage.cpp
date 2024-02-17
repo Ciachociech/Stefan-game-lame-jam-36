@@ -8,7 +8,7 @@ void Stage::checkCollision() {
 	if (mainPlayer.getHitbox().left < 0) {
 		mainPlayer.getSprite().setPosition(sf::Vector2f(0, mainPlayer.getSprite().getPosition().y));
 	} else if (mainPlayer.getHitbox().left + mainPlayer.getHitbox().width > 800) {
-		mainPlayer.getSprite().setPosition(sf::Vector2f(800, mainPlayer.getSprite().getPosition().y));
+		mainPlayer.getSprite().setPosition(sf::Vector2f(800 - mainPlayer.getHitbox().width, mainPlayer.getSprite().getPosition().y));
 	}
 	
 	for (const auto& floor : floors) {
@@ -27,6 +27,7 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 				case 'X': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter));
 					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->update();
 					break;
 				}
 				default: {
