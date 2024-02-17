@@ -5,7 +5,6 @@ namespace game {
 MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f) {
 	sprite = &SolidObject::getSprite();
 	sprite->setPosition(sf::Vector2f(400, 360));
-	sprite->setOriginCenter();
 
 	setHitbox(sprite->getGlobalBounds());
 }
@@ -13,40 +12,40 @@ MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head
 MainPlayer::~MainPlayer() {}
 
 void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
-	float moveX = 0;
-	float moveY = 0;
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowLeft) != keyboardInput.end()) {
-		moveX -= 2;
+		predictedMovement.x -= 2;
 		velocity.x = -1.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
-		moveX += 2;
+		predictedMovement.x += 2;
 		velocity.x = 1.f;
 	}
 	else {
 		float xValue = 0.01f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-		moveX += xValue;
+		predictedMovement.x += xValue;
 		velocity.x = (xValue > 0.f ? 1.f : xValue < 0.f ? -1.f : 0.f);
 	}
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowUp) != keyboardInput.end()) {
-		moveY -= 2;
+		predictedMovement.y -= 2;
 		velocity.y = -1.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowDown) != keyboardInput.end()) {
-		moveY += 2;
+		predictedMovement.y += 2;
 		velocity.y = 1.f;
 	}
 	else {
 		float yValue = 0.01f * sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		moveY += yValue;
+		predictedMovement.y += yValue;
 		velocity.y = (yValue > 0.f ? 1.f : yValue < 0.f ? -1.f : 0.f);
 	}
 
-	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + moveX, sprite->getPosition().y + moveY));
-	setHitbox(sprite->getGlobalBounds());
+	predictedHitbox = sf::FloatRect(getHitbox().left + predictedMovement.x, getHitbox().top + predictedMovement.y, getHitbox().width, getHitbox().height);
 }
 
 void MainPlayer::update() {
+	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + predictedMovement.x, sprite->getPosition().y + predictedMovement.y));
+	predictedMovement = sf::Vector2f(0, 0);
+	setHitbox(sprite->getGlobalBounds());
 }
 
 const sf::Vector2f& MainPlayer::getVelocity() {
@@ -54,24 +53,25 @@ const sf::Vector2f& MainPlayer::getVelocity() {
 }
 
 void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox) {
-	if (getHitbox().left + getHitbox().width / 2 > wallHitbox.left + wallHitbox.width) {
-		sprite->setPosition(sf::Vector2f(wallHitbox.left + wallHitbox.width + getHitbox().width / 2 + 1.f, sprite->getPosition().y));
+	if (!predictedHitbox.intersects(wallHitbox)) {
+		return;
+	}
+	if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
+		predictedMovement.y = 0.f;
+		velocity.y = 0.f;
+	}
+	else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
+		predictedMovement.y = 0.f;
+		velocity.y = 0.f;
+	}
+	if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
+		predictedMovement.x = 0.f;
 		velocity.x = 0.f;
 	}
-	else if (getHitbox().left + getHitbox().width - getHitbox().width / 2 < wallHitbox.left) {
-		sprite->setPosition(sf::Vector2f(wallHitbox.left - getHitbox().width / 2 - 1.f, sprite->getPosition().y));
+	else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
+		predictedMovement.x = 0.f;
 		velocity.x = 0.f;
 	}
-	if (getHitbox().top + getHitbox().height / 2 > wallHitbox.top + wallHitbox.height) {
-		sprite->setPosition(sf::Vector2f(sprite->getPosition().x, wallHitbox.top + getHitbox().width / 2 + wallHitbox.height + 1.f));
-		velocity.x = 0.f;
-	}
-	else if (getHitbox().top + getHitbox().height - getHitbox().height / 2 < wallHitbox.top) {
-		sprite->setPosition(sf::Vector2f(sprite->getPosition().x, wallHitbox.top - getHitbox().width / 2 - 1.f));
-		velocity.x = 0.f;
-	}
-
-	setHitbox(sprite->getGlobalBounds());
 }
 
 }
