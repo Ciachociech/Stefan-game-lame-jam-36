@@ -7,6 +7,7 @@
 #include <SFML/System.hpp>
 
 #include <drawable/Sprite.h>
+#include <game/Floor.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
@@ -19,6 +20,8 @@ private:
 
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
+
+	bool isFloorGlued = true;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
@@ -27,7 +30,7 @@ public:
 	void update() override;
 
 	const sf::Vector2f& getVelocity();
-	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
+	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
 };
 
 }

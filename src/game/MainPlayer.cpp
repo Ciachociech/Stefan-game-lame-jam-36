@@ -17,11 +17,11 @@ MainPlayer::~MainPlayer() {}
 
 void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowLeft) != keyboardInput.end()) {
-		predictedMovement.x -= 2;
+		predictedMovement.x -= 8;
 		velocity.x = -1.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
-		predictedMovement.x += 2;
+		predictedMovement.x += 8;
 		velocity.x = 1.f;
 	}
 	else {
@@ -30,11 +30,11 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 		velocity.x = (xValue > 0.f ? 1.f : xValue < 0.f ? -1.f : 0.f);
 	}
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowUp) != keyboardInput.end()) {
-		predictedMovement.y -= 2;
+		predictedMovement.y -= 8;
 		velocity.y = -1.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowDown) != keyboardInput.end()) {
-		predictedMovement.y += 2;
+		predictedMovement.y += 8;
 		velocity.y = 1.f;
 	}
 	else {
@@ -56,28 +56,40 @@ const sf::Vector2f& MainPlayer::getVelocity() {
 	return velocity;
 }
 
-void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox) {
+void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType) {
 	if (!predictedHitbox.intersects(wallHitbox)) {
 		return;
 	}
-	if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
-		predictedMovement.y = 0.f;
-		velocity.y = 0.f;
+	switch (floorType) {
+		case FloorType::normal: {
+			if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
+				predictedMovement.y = 0.f;
+				velocity.y = 0.f;
+			}
+			else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
+				predictedMovement.y = 0.f;
+				velocity.y = 0.f;
+			}
+			break;
+		}
+		case FloorType::edge: {
+			if (predictedHitbox.top + predictedHitbox.height <= wallHitbox.top || predictedHitbox.top >= wallHitbox.top + wallHitbox.height) {
+				break;
+			} else {
+				predictedMovement.y = 0.f;
+				velocity.y = 0.f;
+			}
+			if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
+				predictedMovement.x = 0.f;
+				velocity.x = 0.f;
+			}
+			else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
+				predictedMovement.x = 0.f;
+				velocity.x = 0.f;
+			}
+			break;
+		}
 	}
-	else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
-		predictedMovement.y = 0.f;
-		velocity.y = 0.f;
-	}
-	/*
-	if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
-		predictedMovement.x = 0.f;
-		velocity.x = 0.f;
-	}
-	else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
-		predictedMovement.x = 0.f;
-		velocity.x = 0.f;
-	}
-	*/
 }
 
 }
