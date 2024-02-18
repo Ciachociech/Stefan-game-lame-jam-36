@@ -39,7 +39,7 @@ void Stage::checkCollision() {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
 				//printf("Interaction with beholder's ray!");
 				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
-				mainPlayer.getSprite().setPosition(sf::Vector2f(32, 384));
+				mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
 			}
 		}
 	}
