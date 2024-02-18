@@ -21,7 +21,7 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 		velocity.x = -1.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
-		predictedMovement.x += 2;
+		predictedMovement.x += 16;
 		velocity.x = 1.f;
 	}
 	else {
@@ -89,7 +89,6 @@ void MainPlayer::setHealth(int value) {
 	if (invinsibilityFrames <= 0) {
 		health = value;
 		invinsibilityFrames = 60;
-		printf("MainPlayer has been damaged!");
 	}
 }
 
