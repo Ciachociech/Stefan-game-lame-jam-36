@@ -7,6 +7,7 @@
 #include <SFML/System.hpp>
 
 #include <drawable/Sprite.h>
+#include <game/Floor.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
@@ -19,7 +20,10 @@ private:
 
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
+
 	bool collision{ false };
+	int health;
+	int invinsibilityFrames = 0;
 
 public:
 	MainPlayer();
@@ -29,9 +33,13 @@ public:
 	void update() override;
 
 	const sf::Vector2f& getVelocity();
-	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
 
-	bool jump(const sf::Vector2f position, int time);
+	int getHealth();
+	void setHealth(int value);
+	int getInvinsibilityFrames();
+
+  void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
+  bool jump(const sf::Vector2f position, int time);
 };
 
 }
