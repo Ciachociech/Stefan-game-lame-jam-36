@@ -32,14 +32,12 @@ void Stage::checkCollision() {
 
 	for (const auto& beholder : beholders) {
 		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
-			//printf("Interaction with beholder!");
 		}
 		if (!beholder->getIsRayActive()) { continue; }
 		for (const auto& beholderRay : beholder->getRayHitboxes()) {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
-				//printf("Interaction with beholder's ray!");
 				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
-				mainPlayer.getSprite().setPosition(sf::Vector2f(32, 384));
+				mainPlayer.getSprite().setPosition(sf::Vector2f(736, 376));
 			}
 		}
 	}
@@ -59,12 +57,14 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 					floors.at(floorCounter - 1)->update();
 					break;
 				}
-				case 'E': {
+				case 'E':
+				case 'B': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::edge));
 					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
 					floors.at(floorCounter - 1)->update();
 					break;
 				}
+
 				default: {
 					break;
 				}
@@ -75,10 +75,10 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 
 Stage::Stage(sf::RenderWindow* window) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
 	interpretStagePattern(pattern1);
-	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(384.f, 168.f)));
-	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(544.f, 350.f)));
-	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(512.f, 318.f)));
-	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(480.f, 286.f)));
+	//beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(384.f, 168.f)));
+	//beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(544.f, 350.f)));
+	//beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(512.f, 318.f)));
+	//beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(480.f, 286.f)));
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {

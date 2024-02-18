@@ -9,6 +9,7 @@ namespace game {
 // . - empty
 // X - floor (normal)
 // E - floor (edge)
+// B - box
 
 std::string pattern1[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
 							 ".........................",
@@ -18,10 +19,10 @@ std::string pattern1[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
 							 ".........................",
 							 ".........................",
 							 ".........................",
-							 "..EXXXXXXXXXXXXXXXXXXXXXX",
-							 ".........................",
-							 ".........................",
-							 ".........................",
+							 "...EXXXXXXXXXXXXXXXXXXXXX",
+							 "B........................",
+							 "BB.......................",
+							 "BBB...B...B....B.........",
 							 "XXXXXXXXXXXXXXXXXXXXXXXXX" };
 
 std::string emptyPattern[13] = { ".........................",

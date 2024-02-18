@@ -13,7 +13,7 @@ namespace {
 
 MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f), health(5) {
 	sprite = &SolidObject::getSprite();
-	sprite->setPosition(sf::Vector2f(400, 360));
+	sprite->setPosition(sf::Vector2f(736, 376));
 
 	setHitbox(sprite->getGlobalBounds());
 }
@@ -74,12 +74,12 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox, Floor
 
 	switch (floorType) {
 		case FloorType::normal: {
-			if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
-				predictedMovement.y = 0.f;
+			if (predictedMovement.y < 0.f && predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
+				predictedMovement.y = wallHitbox.top + wallHitbox.height - getHitbox().top;
 				velocity.y = 0.f;
 			}
-			else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
-				predictedMovement.y = 0.f;
+			else if (predictedMovement.y > 0.f && predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
+				predictedMovement.y = wallHitbox.top - getHitbox().top - getHitbox().height;
 				velocity.y = 0.f;
 			}
 			break;
