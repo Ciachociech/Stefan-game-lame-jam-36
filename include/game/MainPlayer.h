@@ -31,7 +31,7 @@ public:
 	const sf::Vector2f& getVelocity();
 	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
 
-	void jump(const sf::Vector2f position, int time);
+	bool jump(const sf::Vector2f position, int time);
 };
 
 }

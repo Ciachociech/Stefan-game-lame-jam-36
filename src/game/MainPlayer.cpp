@@ -7,7 +7,8 @@
 namespace game {
 
 namespace {
-	const float g = -9.81;
+	const float g{ -9.81 };
+	bool jump_flag{ false };
 }
 
 MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f) {
@@ -50,10 +51,13 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 	//	predictedMovement.y += yValue;
 	//	velocity.y = (yValue > 0.f ? 1.f : yValue < 0.f ? -1.f : 0.f);
 	//}
+	//
 
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::space) != keyboardInput.end()) {
-		jump(sf::Vector2f(sprite->getPosition().x, sprite->getPosition().y), 1);
+		if (jump_flag == false)	jump_flag = jump(sf::Vector2f(sprite->getPosition().x, sprite->getPosition().y), 1);
+		printf("jump_flag : % d\n", jump_flag);
 	}
+	if (velocity.y == 0.f)	jump_flag = false;
 
 	if (!collision) {
 		velocity.y = 1.f;
@@ -63,10 +67,11 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 	predictedHitbox = sf::FloatRect(getHitbox().left + predictedMovement.x, getHitbox().top + predictedMovement.y, getHitbox().width, getHitbox().height);
 }
 
-void MainPlayer::jump(const sf::Vector2f position, int time) {
+bool MainPlayer::jump(const sf::Vector2f position, int time) {
 	//auto x0y0 = sf::Vector2f(position.x, position.y);
 	velocity.y = -15.f;
 	predictedMovement.y += velocity.y * time - g * time * time / 2;
+	return true;
 
 	// notatki stare
 	// rzut pionowy: y = y0 + vy*t + g*t*t/2
