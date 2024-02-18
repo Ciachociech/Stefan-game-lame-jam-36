@@ -11,9 +11,10 @@ namespace {
 	bool jump_flag{ false };
 }
 
-MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f), health(5) {
+MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/concept-asset.png"), velocity(0.f, 0.f), health(5) {
 	sprite = &SolidObject::getSprite();
-	sprite->setPosition(sf::Vector2f(400, 360));
+	sprite->setPosition(sf::Vector2f(700, 384));
+	sprite->setTextureRect(sf::IntRect(128, 0, 32, 32));
 
 	setHitbox(sprite->getGlobalBounds());
 }
@@ -22,19 +23,25 @@ MainPlayer::~MainPlayer() {}
 
 void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowLeft) != keyboardInput.end()) {
-		velocity.x = -8.f;
+		velocity.x = -4.f;
+		sprite->setScale(sf::Vector2f(1.f, 1.f));
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
-		velocity.x = 8.f;
+		velocity.x = 4.f;
+		sprite->setScale(sf::Vector2f(-1.f, 1.f));
 	}
 	else if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) != 0.0) {
-		velocity.x *= 0.01f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		velocity.x *= 0.04f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		sprite->setScale(sf::Vector2f(sf::Joystick::getAxisPosition(0, sf::Joystick::X) < 0.0 ? 1.f : -1.f, 1.f));
 	}
 
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::space) != keyboardInput.end() || std::find(joystickInput.begin(), joystickInput.end(), window::PressedButton::A) != joystickInput.end()) {
 		if (jump_flag == false)	jump_flag = jump(sf::Vector2f(sprite->getPosition().x, sprite->getPosition().y));
 	}
-	if (velocity.y == 0.f)	jump_flag = false;
+	if (velocity.y == 0.f) {
+		jump_flag = false;
+		sprite->setTextureRect(sf::IntRect(128, 0, 32, 32));
+	}
 
 	if (!collision) {
 		velocity.y = 1.f;
@@ -49,6 +56,7 @@ bool MainPlayer::jump(const sf::Vector2f position) {
 	//auto x0y0 = sf::Vector2f(position.x, position.y);
 	velocity.y = -45.f;
 	predictedMovement.y += velocity.y - g / 2;
+	sprite->setTextureRect(sf::IntRect(160, 0, 32, 32));
 	return true;
 }
 

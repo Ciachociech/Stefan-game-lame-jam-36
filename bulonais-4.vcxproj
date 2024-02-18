@@ -181,8 +181,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\sprites\beholder-ray.png" />
+    <Image Include="assets\sprites\concept-asset.png" />
     <Image Include="assets\sprites\grid-part.png" />
-    <Image Include="assets\sprites\stefan-head2.png" />
     <Image Include="assets\sprites\stone-test.png" />
     <Image Include="assets\sprites\WIP32x32.png" />
   </ItemGroup>

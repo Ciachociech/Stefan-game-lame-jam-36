@@ -4,7 +4,7 @@ namespace window {
 	
 WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window) {
     sf::Image icon;
-    icon.loadFromFile("assets/sprites/stefan-head2.png");
+    icon.loadFromFile("assets/sprites/WIP32x32.png");
     this->window.setIcon(32, 32, icon.getPixelsPtr());
 }
 
