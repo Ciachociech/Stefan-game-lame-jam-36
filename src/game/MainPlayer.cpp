@@ -6,7 +6,7 @@
 
 namespace game {
 
-MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f) {
+MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f), health(5) {
 	sprite = &SolidObject::getSprite();
 	sprite->setPosition(sf::Vector2f(400, 360));
 
@@ -50,6 +50,9 @@ void MainPlayer::update() {
 	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + predictedMovement.x, sprite->getPosition().y + predictedMovement.y));
 	predictedMovement = sf::Vector2f(0, 0);
 	setHitbox(sprite->getGlobalBounds());
+	if (invinsibilityFrames > 0) {
+		invinsibilityFrames--;
+	}
 }
 
 const sf::Vector2f& MainPlayer::getVelocity() {
@@ -79,5 +82,17 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox) {
 	}
 	*/
 }
+
+int MainPlayer::getHealth() { return health; }
+
+void MainPlayer::setHealth(int value) { 
+	if (invinsibilityFrames <= 0) {
+		health = value;
+		invinsibilityFrames = 60;
+		printf("MainPlayer has been damaged!");
+	}
+}
+
+int MainPlayer::getInvinsibilityFrames() { return invinsibilityFrames; }
 
 }

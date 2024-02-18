@@ -19,6 +19,9 @@ private:
 
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
+
+	int health;
+	int invinsibilityFrames = 0;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
@@ -28,6 +31,9 @@ public:
 
 	const sf::Vector2f& getVelocity();
 	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
+	int getHealth();
+	void setHealth(int value);
+	int getInvinsibilityFrames();
 };
 
 }
