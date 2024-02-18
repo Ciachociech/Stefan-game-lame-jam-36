@@ -21,8 +21,12 @@ private:
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
 
+	bool jump(const sf::Vector2f position);
+
+	bool collision{ false };
 	int health;
 	int invinsibilityFrames = 0;
+
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
@@ -31,11 +35,12 @@ public:
 	void update() override;
 
 	const sf::Vector2f& getVelocity();
+
 	int getHealth();
 	void setHealth(int value);
 	int getInvinsibilityFrames();
 
-  void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
+	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
 };
 
 }
