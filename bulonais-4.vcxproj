@@ -184,6 +184,9 @@
     <Image Include="assets\sprites\stone-test.png" />
     <Image Include="assets\sprites\WIP32x32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\NerkoOne-Regular.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\sfml_system.redist.2.6.0\build\native\sfml_system.redist.targets" Condition="Exists('packages\sfml_system.redist.2.6.0\build\native\sfml_system.redist.targets')" />
