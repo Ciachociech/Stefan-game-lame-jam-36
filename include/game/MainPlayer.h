@@ -23,6 +23,7 @@ private:
 
 	int health;
 	int invinsibilityFrames = 0;
+	bool isTurnedLeft = true;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();

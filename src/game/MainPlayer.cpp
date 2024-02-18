@@ -6,9 +6,10 @@
 
 namespace game {
 
-MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/stefan-head2.png"), velocity(0.f, 0.f), health(5) {
+MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/concept-asset.png"), velocity(0.f, 0.f), health(5) {
 	sprite = &SolidObject::getSprite();
-	sprite->setPosition(sf::Vector2f(400, 360));
+	sprite->setPosition(sf::Vector2f(700, 384));
+	sprite->setTextureRect(sf::IntRect(128, 0, 32, 32));
 
 	setHitbox(sprite->getGlobalBounds());
 }
@@ -19,15 +20,35 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowLeft) != keyboardInput.end()) {
 		predictedMovement.x -= 8;
 		velocity.x = -1.f;
+		if (!isTurnedLeft) {
+			sprite->setScale(sf::Vector2f(1.f, 1.f));
+			sprite->setPosition(sf::Vector2f(sprite->getPosition().x - 32, sprite->getPosition().y));
+			isTurnedLeft = true;
+		}
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
 		predictedMovement.x += 8;
 		velocity.x = 1.f;
+		if (isTurnedLeft) {
+			sprite->setScale(sf::Vector2f(-1.f, 1.f));
+			sprite->setPosition(sf::Vector2f(sprite->getPosition().x + 32, sprite->getPosition().y));
+			isTurnedLeft = false;
+		}
 	}
 	else {
-		float xValue = 0.01f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+		float xValue = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 		predictedMovement.x += xValue;
 		velocity.x = (xValue > 0.f ? 1.f : xValue < 0.f ? -1.f : 0.f);
+		if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) > 0.f && isTurnedLeft) {
+			sprite->setScale(sf::Vector2f(-1.f, 1.f));
+			sprite->setPosition(sf::Vector2f(sprite->getPosition().x + 32, sprite->getPosition().y));
+			isTurnedLeft = false;
+		}
+		else if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) < 0.f && !isTurnedLeft) {
+			sprite->setScale(sf::Vector2f(1.f, 1.f));
+			sprite->setPosition(sf::Vector2f(sprite->getPosition().x - 32, sprite->getPosition().y));
+			isTurnedLeft = true;
+		}
 	}
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowUp) != keyboardInput.end()) {
 		predictedMovement.y -= 8;
@@ -38,7 +59,7 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 		velocity.y = 1.f;
 	}
 	else {
-		float yValue = 0.01f * sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+		float yValue = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 		predictedMovement.y += yValue;
 		velocity.y = (yValue > 0.f ? 1.f : yValue < 0.f ? -1.f : 0.f);
 	}
@@ -63,35 +84,23 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox, Floor
 	if (!predictedHitbox.intersects(wallHitbox)) {
 		return;
 	}
-	switch (floorType) {
-		case FloorType::normal: {
-			if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
-				predictedMovement.y = 0.f;
-				velocity.y = 0.f;
-			}
-			else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
-				predictedMovement.y = 0.f;
-				velocity.y = 0.f;
-			}
-			break;
-		}
-		case FloorType::edge: {
-			if (predictedHitbox.top + predictedHitbox.height <= wallHitbox.top || predictedHitbox.top >= wallHitbox.top + wallHitbox.height) {
-				break;
-			} else {
-				predictedMovement.y = 0.f;
-				velocity.y = 0.f;
-			}
-			if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
-				predictedMovement.x = 0.f;
-				velocity.x = 0.f;
-			}
-			else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
-				predictedMovement.x = 0.f;
-				velocity.x = 0.f;
-			}
-			break;
-		}
+
+	if (predictedHitbox.top < wallHitbox.top + wallHitbox.height) {
+		predictedMovement.y = 0.f;
+		velocity.y = 0.f;
+	}
+	else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
+		predictedMovement.y = 0.f;
+		velocity.y = 0.f;
+	}
+
+	if (predictedHitbox.left < wallHitbox.left + wallHitbox.width) {
+		predictedMovement.x = 0.f;
+		velocity.x = 0.f;
+	}
+	else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
+		predictedMovement.x = 0.f;
+		velocity.x = 0.f;
 	}
 }
 

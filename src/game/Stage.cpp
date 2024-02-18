@@ -20,26 +20,14 @@ void Stage::checkCollision() {
 
 	for (const auto& beholder : beholders) {
 		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
-			//printf("Interaction with beholder!");
+			mainPlayer.setHealth(mainPlayer.getHealth() - 1);
+			mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
 		}
 		if (!beholder->getIsRayActive()) { continue; }
 		for (const auto& beholderRay : beholder->getRayHitboxes()) {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
-				//printf("Interaction with beholder's ray!");
-			}
-		}
-	}
-
-	for (const auto& beholder : beholders) {
-		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
-			//printf("Interaction with beholder!");
-		}
-		if (!beholder->getIsRayActive()) { continue; }
-		for (const auto& beholderRay : beholder->getRayHitboxes()) {
-			if (mainPlayer.getHitbox().intersects(beholderRay)) {
-				//printf("Interaction with beholder's ray!");
 				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
-				mainPlayer.getSprite().setPosition(sf::Vector2f(32, 384));
+				mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
 			}
 		}
 	}
