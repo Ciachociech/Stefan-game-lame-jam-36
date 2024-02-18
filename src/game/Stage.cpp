@@ -29,6 +29,20 @@ void Stage::checkCollision() {
 			}
 		}
 	}
+
+	for (const auto& beholder : beholders) {
+		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
+			//printf("Interaction with beholder!");
+		}
+		if (!beholder->getIsRayActive()) { continue; }
+		for (const auto& beholderRay : beholder->getRayHitboxes()) {
+			if (mainPlayer.getHitbox().intersects(beholderRay)) {
+				//printf("Interaction with beholder's ray!");
+				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
+				mainPlayer.getSprite().setPosition(sf::Vector2f(32, 384));
+			}
+		}
+	}
 }
 
 void Stage::interpretStagePattern(const std::string* pattern) {
@@ -79,6 +93,7 @@ bool Stage::update() {
 		beholder->update();
 	}
 
+	if (mainPlayer.getHealth() <= 0) { return false; }
 	return true;
 }
 
@@ -106,7 +121,9 @@ void Stage::render() {
 		}
 	}
 
-	window->draw(mainPlayer.getSprite());
+	if (mainPlayer.getInvinsibilityFrames() % 10 < 5) {
+		window->draw(mainPlayer.getSprite());
+	}
 }
 
 

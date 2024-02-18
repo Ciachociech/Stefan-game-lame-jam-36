@@ -6,14 +6,15 @@
 
 #include <SFML/Graphics.hpp>
 
-//#include <game/Scene.h>
+#include <game/Gameover.h>
+#include <game/Scene.h>
 #include <game/Stage.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
 namespace window {
 
-enum class ProgramState { none, stage /* add states like titlescreen, menu, game and gameover */ };
+enum class ProgramState { none, stage, gameover };
 
 class WindowInstance {
 private:
@@ -24,6 +25,7 @@ private:
 	KeyboardInput keyboard;
 
 	std::unique_ptr<game::Stage> stage;
+	game::Gameover gameover;
 
 	int waitFrames = 0;
 public:

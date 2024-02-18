@@ -21,7 +21,8 @@ private:
 	sf::Vector2f predictedMovement;
 	sf::FloatRect predictedHitbox;
 
-	bool isFloorGlued = true;
+	int health;
+	int invinsibilityFrames = 0;
 public:
 	MainPlayer();
 	virtual ~MainPlayer();
@@ -30,7 +31,11 @@ public:
 	void update() override;
 
 	const sf::Vector2f& getVelocity();
-	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
+	int getHealth();
+	void setHealth(int value);
+	int getInvinsibilityFrames();
+
+  void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
 };
 
 }

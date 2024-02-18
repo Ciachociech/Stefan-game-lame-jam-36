@@ -40,6 +40,9 @@
     <Filter Include="Pliki zasobów\sprites">
       <UniqueIdentifier>{547f7ccf-6833-4663-8042-9a21e34870aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki zasobów\fonts">
+      <UniqueIdentifier>{5af6eb46-c497-43bc-b18c-58920bec410b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -85,6 +88,9 @@
       <Filter>Pliki źródłowe\drawable</Filter>
     </ClCompile>
     <ClCompile Include="src\game\Beholder.cpp">
+      <Filter>Pliki źródłowe\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Gameover.cpp">
       <Filter>Pliki źródłowe\game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,6 +146,9 @@
     <ClInclude Include="include\game\StagePatterns.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\game\Gameover.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\sprites\stefan-head2.png">
@@ -157,5 +166,10 @@
     <Image Include="assets\sprites\stone-test.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\fonts\NerkoOne-Regular.ttf">
+      <Filter>Pliki zasobów\fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
