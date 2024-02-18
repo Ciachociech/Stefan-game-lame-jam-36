@@ -7,6 +7,7 @@
 #include <SFML/System.hpp>
 
 #include <drawable/Sprite.h>
+#include <game/Floor.h>
 #include <window/JoystickInput.h>
 #include <window/KeyboardInput.h>
 
@@ -30,10 +31,11 @@ public:
 	void update() override;
 
 	const sf::Vector2f& getVelocity();
-	void resolveCollisionWithWall(const sf::FloatRect& wallHitbox);
 	int getHealth();
 	void setHealth(int value);
 	int getInvinsibilityFrames();
+
+  void resolveCollisionWithWall(const sf::FloatRect& wallHitbox, FloorType floorType);
 };
 
 }

@@ -7,18 +7,18 @@ namespace game {
 
 // Legend:
 // . - empty
-// X - floor
-
+// X - floor (normal)
+// E - floor (edge)
 
 std::string pattern1[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
 							 ".........................",
 							 ".........................",
 							 ".........................",
-							 "XXXXXXXXXXXXXXXXXXXXXXXXX",
+							 "XXXXXXXXXXXXXXXXXXXXE..EX",
 							 ".........................",
 							 ".........................",
 							 ".........................",
-							 "XXXXXXXXXXXXXXXXXXXXXXXXX",
+							 "..EXXXXXXXXXXXXXXXXXXXXXX",
 							 ".........................",
 							 ".........................",
 							 ".........................",
@@ -37,6 +37,20 @@ std::string emptyPattern[13] = { ".........................",
 								 ".........................",
 								 ".........................",
 								 "........................." };
+
+std::string templatePattern[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
+									".........................",
+									".........................",
+									".........................",
+									"XXXXXXXXXXXXXXXXXXXXXXXXX",
+									".........................",
+									".........................",
+									".........................",
+									"XXXXXXXXXXXXXXXXXXXXXXXXX",
+									".........................",
+									".........................",
+									".........................",
+									"XXXXXXXXXXXXXXXXXXXXXXXXX" };
 
 std::string stefanPattern[13] = { ".........................",
 								  "XXX.XXX.XXX.XXX.XXX.XX..X",

@@ -15,7 +15,19 @@ void Stage::checkCollision() {
 	}
 	
 	for (const auto& floor : floors) {
-		mainPlayer.resolveCollisionWithWall(floor->getHitbox());
+		mainPlayer.resolveCollisionWithWall(floor->getHitbox(), floor->getFloorType());
+	}
+
+	for (const auto& beholder : beholders) {
+		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
+			//printf("Interaction with beholder!");
+		}
+		if (!beholder->getIsRayActive()) { continue; }
+		for (const auto& beholderRay : beholder->getRayHitboxes()) {
+			if (mainPlayer.getHitbox().intersects(beholderRay)) {
+				//printf("Interaction with beholder's ray!");
+			}
+		}
 	}
 
 	for (const auto& beholder : beholders) {
@@ -42,7 +54,13 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 		for (int y = 0; y < 13; ++y) {
 			switch (pattern[y].at(x)) {
 				case 'X': {
-					floors.push_back(std::make_unique<Floor>(++floorCounter));
+					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::normal));
+					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->update();
+					break;
+				}
+				case 'E': {
+					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::edge));
 					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
 					floors.at(floorCounter - 1)->update();
 					break;

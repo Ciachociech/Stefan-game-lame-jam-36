@@ -5,13 +5,18 @@
 
 namespace game {
 
+enum class FloorType { normal, edge, none };
+
 class Floor : public SolidObject {
 private:
 	bool isHitboxSet = false;
+	FloorType floorType_;
 public:
-	Floor(int counter);
+	Floor(int counter, FloorType floorType);
 
 	void update() override;
+	
+	FloorType& getFloorType();
 };
 
 }
