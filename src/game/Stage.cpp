@@ -17,6 +17,18 @@ void Stage::checkCollision() {
 	for (const auto& floor : floors) {
 		mainPlayer.resolveCollisionWithWall(floor->getHitbox());
 	}
+
+	for (const auto& beholder : beholders) {
+		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
+			//printf("Interaction with beholder!");
+		}
+		if (!beholder->getIsRayActive()) { continue; }
+		for (const auto& beholderRay : beholder->getRayHitboxes()) {
+			if (mainPlayer.getHitbox().intersects(beholderRay)) {
+				//printf("Interaction with beholder's ray!");
+			}
+		}
+	}
 }
 
 void Stage::interpretStagePattern(const std::string* pattern) {
@@ -43,6 +55,10 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 
 Stage::Stage(sf::RenderWindow* window) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
 	interpretStagePattern(pattern1);
+	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(384.f, 168.f)));
+	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(544.f, 350.f)));
+	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(512.f, 318.f)));
+	beholders.push_back(std::make_unique<Beholder>(0, sf::Vector2f(480.f, 286.f)));
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
@@ -52,6 +68,11 @@ void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, c
 bool Stage::update() {
 	checkCollision();
 	mainPlayer.update();
+
+	for (const auto& beholder : beholders) {
+		beholder->update();
+	}
+
 	return true;
 }
 
@@ -70,6 +91,13 @@ void Stage::render() {
 
 	for (const auto& floor : floors) {
 		window->draw(floor->getSprite());
+	}
+
+	for (const auto& beholder : beholders) {
+		window->draw(beholder->getSprite());
+		if (beholder->getIsRayActive()) {
+			window->draw(beholder->getRaySprite(), sf::RenderStates(sf::BlendAdd));
+		}
 	}
 
 	window->draw(mainPlayer.getSprite());

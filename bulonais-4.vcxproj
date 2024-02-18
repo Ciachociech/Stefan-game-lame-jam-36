@@ -149,6 +149,7 @@
     <ClCompile Include="src\drawable\Sprite.cpp" />
     <ClCompile Include="src\drawable\Text.cpp" />
     <ClCompile Include="src\drawable\Texture.cpp" />
+    <ClCompile Include="src\game\Beholder.cpp" />
     <ClCompile Include="src\game\Floor.cpp" />
     <ClCompile Include="src\game\MainPlayer.cpp" />
     <ClCompile Include="src\game\Stage.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="include\drawable\Sprite.h" />
     <ClInclude Include="include\drawable\Text.h" />
     <ClInclude Include="include\drawable\Texture.h" />
+    <ClInclude Include="include\game\Beholder.h" />
     <ClInclude Include="include\game\Floor.h" />
     <ClInclude Include="include\game\MainPlayer.h" />
     <ClInclude Include="include\game\Object.h" />
@@ -176,7 +178,7 @@
     <ClInclude Include="include\window\WindowInstance.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\sprites\beholder-eye.png" />
+    <Image Include="assets\sprites\beholder-ray.png" />
     <Image Include="assets\sprites\grid-part.png" />
     <Image Include="assets\sprites\stefan-head2.png" />
     <Image Include="assets\sprites\stone-test.png" />

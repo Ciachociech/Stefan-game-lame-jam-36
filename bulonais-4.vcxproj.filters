@@ -84,6 +84,9 @@
     <ClCompile Include="src\game\Floor.cpp">
       <Filter>Pliki źródłowe\drawable</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Beholder.cpp">
+      <Filter>Pliki źródłowe\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\window\JoystickInput.h">
@@ -131,6 +134,12 @@
     <ClInclude Include="include\game\SolidObject.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\game\Beholder.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game\StagePatterns.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\sprites\stefan-head2.png">
@@ -140,6 +149,12 @@
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
     <Image Include="assets\sprites\WIP32x32.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\beholder-ray.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\stone-test.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
   </ItemGroup>
