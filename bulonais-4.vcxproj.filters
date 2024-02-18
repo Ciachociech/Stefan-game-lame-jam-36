@@ -90,6 +90,9 @@
     <ClCompile Include="src\game\Beholder.cpp">
       <Filter>Pliki źródłowe\game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Gameover.cpp">
+      <Filter>Pliki źródłowe\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\window\JoystickInput.h">
@@ -141,6 +144,9 @@
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
     <ClInclude Include="include\game\StagePatterns.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game\Gameover.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
   </ItemGroup>
