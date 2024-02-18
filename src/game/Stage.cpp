@@ -96,7 +96,7 @@ void Stage::render() {
 	for (const auto& beholder : beholders) {
 		window->draw(beholder->getSprite());
 		if (beholder->getIsRayActive()) {
-			window->draw(beholder->getRaySprite());
+			window->draw(beholder->getRaySprite(), sf::RenderStates(sf::BlendAdd));
 		}
 	}
 
