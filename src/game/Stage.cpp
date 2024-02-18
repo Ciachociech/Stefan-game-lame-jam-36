@@ -26,6 +26,8 @@ void Stage::checkCollision() {
 		for (const auto& beholderRay : beholder->getRayHitboxes()) {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
 				//printf("Interaction with beholder's ray!");
+				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
+				mainPlayer.getSprite().setPosition(sf::Vector2f(32, 384));
 			}
 		}
 	}
@@ -73,6 +75,7 @@ bool Stage::update() {
 		beholder->update();
 	}
 
+	if (mainPlayer.getHealth() <= 0) { return false; }
 	return true;
 }
 
@@ -100,7 +103,9 @@ void Stage::render() {
 		}
 	}
 
-	window->draw(mainPlayer.getSprite());
+	if (mainPlayer.getInvinsibilityFrames() % 10 < 5) {
+		window->draw(mainPlayer.getSprite());
+	}
 }
 
 

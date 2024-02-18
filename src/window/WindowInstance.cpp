@@ -41,7 +41,10 @@ int WindowInstance::loop() {
             }
             case ProgramState::stage: {
                 stage->processInput(keyboardInput, joystickInput);
-                stage->update();
+                if (!stage->update()) {
+                    this->window.close();
+                    return 1;
+                }
                 stage->render();
                 break;
             }
