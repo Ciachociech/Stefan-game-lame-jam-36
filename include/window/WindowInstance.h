@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <audio/Sound.h>
+#include <audio/SoundBuffer.h>
 #include <game/Gameover.h>
 #include <game/Scene.h>
 #include <game/Stage.h>
@@ -28,6 +30,9 @@ private:
 	std::unique_ptr<game::Stage> stage;
 	game::Gameover gameover;
 	game::Titlescreen titlescreen;
+
+	audio::Sound sound;
+	audio::SoundBuffer soundComplete;
 
 	int waitFrames = 0;
 	int stageCounter = 1;

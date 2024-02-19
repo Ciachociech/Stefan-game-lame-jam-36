@@ -2,7 +2,7 @@
 
 namespace window {
 	
-WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window), titlescreen(&window) {
+WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window), titlescreen(&window), sound("sound"), soundComplete("assets/audio/complete.wav") {
     sf::Image icon;
     icon.loadFromFile("assets/sprites/b4-logo.png");
     this->window.setIcon(32, 32, icon.getPixelsPtr());
@@ -54,6 +54,9 @@ int WindowInstance::loop() {
                 stage->processInput(keyboardInput, joystickInput);
                 switch (stage->update()) {
                     case 1: {
+                        sound.setBuffer(soundComplete);
+                        sound.play();
+
                         if (stageCounter < 3) {
                             stage.reset();
                             stage = std::make_unique<game::Stage>(&window, ++stageCounter);

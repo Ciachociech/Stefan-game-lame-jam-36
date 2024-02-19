@@ -14,12 +14,14 @@ void Stage::checkCollision() {
 
 	for (const auto& beholder : beholders) {
 		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
+			sound.play();
 			mainPlayer.setHealth(mainPlayer.getHealth() - 1);
 			mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
 		}
 		if (!beholder->getIsRayActive()) { continue; }
 		for (const auto& beholderRay : beholder->getRayHitboxes()) {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
+				sound.play();
 				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
 				mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
 			}
@@ -76,7 +78,8 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 	}
 }
 
-Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel"), finishTile() {
+Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel"), finishTile(),
+																 sound("sound"), soundDamage("assets/audio/damage.wav"), soundDefeat("assets/audio/defeat.wav") {
 	switch (stageCounter) {
 		case 1: defualt: {
 			interpretStagePattern(pattern1);
@@ -106,6 +109,8 @@ Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), 
 	textLevel.setPosition(sf::Vector2f(8, 448));
 	textLevel.setFillColor(lighterStefanColor);
 	textLevel.setCharacterSize(32);
+
+	sound.setBuffer(soundDamage);
 	
 	health.getSprite().setTextureRect(sf::IntRect(128, 32, 32, 32));
 }
@@ -122,8 +127,15 @@ int Stage::update() {
 		beholder->update();
 	}
 
-	if (mainPlayer.getHealth() <= 0) { return -1; }
-	if (isStageCompleted) { return 1; }
+	if (mainPlayer.getHealth() <= 0) { 
+		sound.stop();
+		sound.setBuffer(soundDefeat);
+		sound.play();
+		return -1; 
+	}
+	if (isStageCompleted) { 
+		return 1;
+	}
 	return 0;
 }
 

@@ -8,6 +8,8 @@
 
 #include <game/Scene.h>
 
+#include <audio/Sound.h>
+#include <audio/SoundBuffer.h>
 #include <drawable/Sprite.h>
 #include <drawable/Text.h>
 #include <drawable/Texture.h>
@@ -35,6 +37,10 @@ private:
 	Object health;
 	MainPlayer mainPlayer;
 	Finish finishTile;
+
+	audio::Sound sound;
+	audio::SoundBuffer soundDamage;
+	audio::SoundBuffer soundDefeat;
 
 	drawable::Text textLevel;
 	drawable::Text textHealth;

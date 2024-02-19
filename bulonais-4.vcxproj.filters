@@ -43,6 +43,9 @@
     <Filter Include="Pliki zasobów\fonts">
       <UniqueIdentifier>{5af6eb46-c497-43bc-b18c-58920bec410b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki zasobów\audio">
+      <UniqueIdentifier>{abb9202f-f71f-4fc5-8ad9-167354ab5922}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,5 +192,16 @@
     <Font Include="assets\fonts\NerkoOne-Regular.ttf">
       <Filter>Pliki zasobów\fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\complete.wav">
+      <Filter>Pliki zasobów\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\damage.wav">
+      <Filter>Pliki zasobów\audio</Filter>
+    </Media>
+    <Media Include="assets\audio\defeat.wav">
+      <Filter>Pliki zasobów\audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>
