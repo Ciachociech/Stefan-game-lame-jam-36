@@ -1,4 +1,5 @@
-IMPORTANT: This project unfortunately was failed due to several things like lack of implementing collsion and jumping system, etc...
+IMPORTANT: This project unfortunately was failed due to several things like lack of implementing collsion and jumping system, etc...\
+EDIT: I managed to do something, the game jam version is in branch: draft/game-as-not-platformer
 
 This game should be a platformer about Stefan jumping across levels and avoiding evil look of beholders.\
 This repository contain most of code which should be done and some graphic assets which was planned to use. Unfortunately, none of audio resources was added nor stage templates has been implemented.
