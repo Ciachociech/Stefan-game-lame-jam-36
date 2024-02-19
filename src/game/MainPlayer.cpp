@@ -18,8 +18,7 @@ MainPlayer::~MainPlayer() {}
 
 void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowLeft) != keyboardInput.end()) {
-		predictedMovement.x -= 8;
-		velocity.x = -1.f;
+		velocity.x = -8.f;
 		if (!isTurnedLeft) {
 			sprite->setScale(sf::Vector2f(1.f, 1.f));
 			sprite->setPosition(sf::Vector2f(sprite->getPosition().x - 32, sprite->getPosition().y));
@@ -27,18 +26,15 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 		}
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowRight) != keyboardInput.end()) {
-		predictedMovement.x += 8;
-		velocity.x = 1.f;
+		velocity.x = 8.f;
 		if (isTurnedLeft) {
 			sprite->setScale(sf::Vector2f(-1.f, 1.f));
 			sprite->setPosition(sf::Vector2f(sprite->getPosition().x + 32, sprite->getPosition().y));
 			isTurnedLeft = false;
 		}
 	}
-	else {
-		float xValue = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-		predictedMovement.x += xValue;
-		velocity.x = (xValue > 0.f ? 1.f : xValue < 0.f ? -1.f : 0.f);
+	else if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) != 0.f) {
+		velocity.x = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::X);
 		if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) > 0.f && isTurnedLeft) {
 			sprite->setScale(sf::Vector2f(-1.f, 1.f));
 			sprite->setPosition(sf::Vector2f(sprite->getPosition().x + 32, sprite->getPosition().y));
@@ -51,25 +47,26 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 		}
 	}
 	if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowUp) != keyboardInput.end()) {
-		predictedMovement.y -= 8;
-		velocity.y = -1.f;
+		velocity.y = -8.f;
 	}
 	else if (std::find(keyboardInput.begin(), keyboardInput.end(), window::PressedKey::arrowDown) != keyboardInput.end()) {
-		predictedMovement.y += 8;
-		velocity.y = 1.f;
+		velocity.y = 8.f;
 	}
-	else {
-		float yValue = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
-		predictedMovement.y += yValue;
-		velocity.y = (yValue > 0.f ? 1.f : yValue < 0.f ? -1.f : 0.f);
+	else if (sf::Joystick::getAxisPosition(0, sf::Joystick::Y) != 0.f) {
+		velocity.y = 0.08f * sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
 	}
 
+	predictedMovement = sf::Vector2f(velocity.x, velocity.y);
 	predictedHitbox = sf::FloatRect(getHitbox().left + predictedMovement.x, getHitbox().top + predictedMovement.y, getHitbox().width, getHitbox().height);
 }
 
 void MainPlayer::update() {
 	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + predictedMovement.x, sprite->getPosition().y + predictedMovement.y));
 	predictedMovement = sf::Vector2f(0, 0);
+
+	velocity.x *= 0.8;
+	velocity.y *= 0.8;
+
 	setHitbox(sprite->getGlobalBounds());
 	if (invinsibilityFrames > 0) {
 		invinsibilityFrames--;
