@@ -36,35 +36,35 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 	const int gridY = grid.getSprite().getLocalBounds().getSize().y;
 
 	for (int x = 0; x < 25; ++x) {
-		for (int y = 0; y < 13; ++y) {
+		for (int y = 0; y < 15; ++y) {
 			switch (pattern[y].at(x)) {
 				case 'S': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::stone));
-					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 					floors.at(floorCounter - 1)->update();
 					break;
 				}
 				case 'G': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::grass));
-					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 					floors.at(floorCounter - 1)->update();
 					break;
 				}
 				case 'R': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::brick));
-					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 					floors.at(floorCounter - 1)->update();
 					break;
 				}
 				case 'B': {
 					floors.push_back(std::make_unique<Floor>(++floorCounter, FloorType::stone));
-					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					floors.at(floorCounter - 1)->getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 					floors.at(floorCounter - 1)->update();
-					beholders.push_back(std::make_unique<Beholder>(++beholderCounter, sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY))));
+					beholders.push_back(std::make_unique<Beholder>(++beholderCounter, sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY))));
 					break;
 				}
 				case 'F': {
-					finishTile.getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					finishTile.getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 					finishTile.update();
 					break;
 				}
@@ -98,7 +98,7 @@ Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), 
 	textHealth.setTextContent(" level: " + std::to_string(stageCounter) + "/3");
 	textHealth.setFont(font);
 	textHealth.setPosition(sf::Vector2f(0, -8));
-	textHealth.setFillColor(lighterStefanColor);
+	textHealth.setFillColor(sf::Color(218, 208, 203, 255));
 	textHealth.setCharacterSize(32);
 
 	textLevel.setTextContent("health:");
@@ -130,6 +130,7 @@ int Stage::update() {
 void Stage::render() {
 	sf::RenderWindow* window = getWindow();
 
+	/*
 	const int gridX = grid.getSprite().getLocalBounds().getSize().x;
 	const int gridY = grid.getSprite().getLocalBounds().getSize().y;
 
@@ -139,14 +140,7 @@ void Stage::render() {
 			window->draw(grid.getSprite());
 		}
 	}
-
-	window->draw(textHealth);
-	window->draw(textLevel);
-
-	for (int i = 0; i < mainPlayer.getHealth(); ++i) {
-		health.getSprite().setPosition(sf::Vector2f(96 + i * (gridX + 8), 448));
-		window->draw(health.getSprite());
-	}
+	*/
 
 	for (const auto& floor : floors) {
 		window->draw(floor->getSprite());
@@ -159,7 +153,15 @@ void Stage::render() {
 		}
 	}
 
+	window->draw(textHealth);
+	window->draw(textLevel);
+
 	window->draw(finishTile.getSprite());
+
+	for (int i = 0; i < mainPlayer.getHealth(); ++i) {
+		health.getSprite().setPosition(sf::Vector2f(112 + i * 40, 448));
+		window->draw(health.getSprite());
+	}
 
 	if (mainPlayer.getInvinsibilityFrames() % 10 < 5) {
 		window->draw(mainPlayer.getSprite());

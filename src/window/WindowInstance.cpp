@@ -4,7 +4,7 @@ namespace window {
 	
 WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window) {
     sf::Image icon;
-    icon.loadFromFile("assets/sprites/WIP32x32.png");
+    icon.loadFromFile("assets/sprites/b4-logo.png");
     this->window.setIcon(32, 32, icon.getPixelsPtr());
 }
 
@@ -28,8 +28,6 @@ int WindowInstance::loop() {
             }
         }
 
-        this->window.clear(sf::Color(0, 0, 0, 255));
-
         switch (this->state) {
             /*
             add cases which are connected with ProgramStates
@@ -40,6 +38,8 @@ int WindowInstance::loop() {
                 break;
             }
             case ProgramState::stage: {
+                this->window.clear(sf::Color(118, 168, 204, 255));
+
                 stage->processInput(keyboardInput, joystickInput);
                 switch (stage->update()) {
                     case 1: {
@@ -57,9 +57,12 @@ int WindowInstance::loop() {
                     }
                 }
                 stage->render();
+
                 break;
             }
             case ProgramState::gameover: {
+                this->window.clear(sf::Color(118, 168, 204, 255));
+
                 gameover.processInput(keyboardInput, joystickInput);
                 if (gameover.update()) {
                     stage.reset();
@@ -68,6 +71,7 @@ int WindowInstance::loop() {
                 }
                 if (stage) { stage->render(); }
                 gameover.render();
+
                 break;
             }
             default: {

@@ -182,6 +182,7 @@
     <ClInclude Include="include\window\WindowInstance.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\sprites\b4-logo.png" />
     <Image Include="assets\sprites\beholder-ray.png" />
     <Image Include="assets\sprites\concept-asset.png" />
     <Image Include="assets\sprites\finish.png" />

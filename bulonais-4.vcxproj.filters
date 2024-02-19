@@ -172,6 +172,9 @@
     <Image Include="assets\sprites\concept-asset.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
+    <Image Include="assets\sprites\b4-logo.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\fonts\NerkoOne-Regular.ttf">
