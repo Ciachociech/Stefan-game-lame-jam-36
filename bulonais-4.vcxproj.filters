@@ -96,6 +96,9 @@
     <ClCompile Include="src\game\Finish.cpp">
       <Filter>Pliki źródłowe\game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Titlescreen.cpp">
+      <Filter>Pliki źródłowe\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\window\JoystickInput.h">
@@ -155,6 +158,9 @@
     <ClInclude Include="include\game\Finish.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\game\Titlescreen.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\sprites\grid-part.png">
@@ -173,6 +179,9 @@
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
     <Image Include="assets\sprites\b4-logo.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\titlescreen.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
   </ItemGroup>

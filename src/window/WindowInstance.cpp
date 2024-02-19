@@ -2,7 +2,7 @@
 
 namespace window {
 	
-WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window) {
+WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window), titlescreen(&window) {
     sf::Image icon;
     icon.loadFromFile("assets/sprites/b4-logo.png");
     this->window.setIcon(32, 32, icon.getPixelsPtr());
@@ -33,8 +33,19 @@ int WindowInstance::loop() {
             add cases which are connected with ProgramStates
             */
             case ProgramState::none: {
-                state = ProgramState::stage;
-                stage = std::make_unique<game::Stage>(&window, stageCounter);
+                state = ProgramState::titlescreen;
+                break;
+            }
+            case ProgramState::titlescreen: {
+                this->window.clear(sf::Color(0, 0, 0, 255));
+
+                titlescreen.processInput(keyboardInput, joystickInput);
+                if (titlescreen.update()) {
+                    state = ProgramState::stage;
+                    stage = std::make_unique<game::Stage>(&window, stageCounter);
+                }
+                titlescreen.render();
+                
                 break;
             }
             case ProgramState::stage: {
@@ -54,6 +65,7 @@ int WindowInstance::loop() {
                     }
                     case -1: {
                         state = ProgramState::gameover;
+                        break;
                     }
                 }
                 stage->render();
@@ -68,6 +80,7 @@ int WindowInstance::loop() {
                     stage.reset();
                     stageCounter = 1;
                     state = ProgramState::none;
+                    stage = std::make_unique<game::Stage>(&window, stageCounter);
                 }
                 if (stage) { stage->render(); }
                 gameover.render();

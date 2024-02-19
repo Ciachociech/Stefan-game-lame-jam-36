@@ -155,6 +155,7 @@
     <ClCompile Include="src\game\Gameover.cpp" />
     <ClCompile Include="src\game\MainPlayer.cpp" />
     <ClCompile Include="src\game\Stage.cpp" />
+    <ClCompile Include="src\game\Titlescreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\window\JoystickInput.cpp" />
     <ClCompile Include="src\window\KeyboardInput.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="include\game\SolidObject.h" />
     <ClInclude Include="include\game\Stage.h" />
     <ClInclude Include="include\game\StagePatterns.h" />
+    <ClInclude Include="include\game\Titlescreen.h" />
     <ClInclude Include="include\window\JoystickInput.h" />
     <ClInclude Include="include\window\KeyboardInput.h" />
     <ClInclude Include="include\window\WindowInstance.h" />
@@ -187,6 +189,7 @@
     <Image Include="assets\sprites\concept-asset.png" />
     <Image Include="assets\sprites\finish.png" />
     <Image Include="assets\sprites\grid-part.png" />
+    <Image Include="assets\sprites\titlescreen.png" />
     <Image Include="assets\sprites\WIP32x32.png" />
   </ItemGroup>
   <ItemGroup>
