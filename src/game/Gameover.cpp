@@ -35,12 +35,12 @@ void Gameover::processInput(const std::vector<window::PressedKey>& keyboardInput
 	if (keyboardInput.size() != 0 || joystickInput.size() != 0) { isAnyInput = true; }
 }
 
-bool Gameover::update() {
+int Gameover::update() {
 	if (isAnyInput && waitForInput-- < 0) { 
 		waitForInput = 30;
-		return false; 
+		return 1; 
 	}
-	return true;
+	return 0;
 }
 
 void Gameover::render() {

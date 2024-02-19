@@ -25,7 +25,7 @@ public:
 	Gameover(sf::RenderWindow* window);
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) override;
-	bool update() override;
+	int update() override;
 	void render() override;
 };
 

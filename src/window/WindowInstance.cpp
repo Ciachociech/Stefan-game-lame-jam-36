@@ -1,7 +1,5 @@
 #include <window/WindowInstance.h>
 
-#include <game/StagePatterns.h>
-
 namespace window {
 	
 WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window) {
@@ -38,20 +36,30 @@ int WindowInstance::loop() {
             */
             case ProgramState::none: {
                 state = ProgramState::stage;
-                stage = std::make_unique<game::Stage>(&window, game::pattern1);
+                stage = std::make_unique<game::Stage>(&window, stageCounter);
                 break;
             }
             case ProgramState::stage: {
                 stage->processInput(keyboardInput, joystickInput);
-                if (!stage->update()) {
-                    state = ProgramState::gameover;
+                switch (stage->update()) {
+                    case 1: {
+                        if (stageCounter < 3) {
+                            stage.reset();
+                            stage = std::make_unique<game::Stage>(&window, ++stageCounter);
+                        }
+                        state = ProgramState::gameover;
+                        break;
+                    }
+                    case -1: {
+                        state = ProgramState::gameover;
+                    }
                 }
                 stage->render();
                 break;
             }
             case ProgramState::gameover: {
                 gameover.processInput(keyboardInput, joystickInput);
-                if (!gameover.update()) {
+                if (gameover.update()) {
                     stage.reset();
                     state = ProgramState::none;
                 }

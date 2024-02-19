@@ -19,7 +19,7 @@ public:
 	Scene(sf::RenderWindow* window) : window_(window) {}
 
 	virtual void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) = 0;
-	virtual bool update() = 0;
+	virtual int update() = 0;
 	virtual void render() = 0;
 };
 

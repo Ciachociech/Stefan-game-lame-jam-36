@@ -1,5 +1,7 @@
 #include <game/Stage.h>
 
+#include <game/StagePatterns.h>
+
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
@@ -67,15 +69,22 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 	}
 }
 
-Stage::Stage(sf::RenderWindow* window, const std::string* pattern) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), mainPlayer() {
-	interpretStagePattern(pattern);
+Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer() {
+	switch (stageCounter) {
+		case 1: defualt: {
+			interpretStagePattern(pattern1);
+			break;
+		}
+	}
+	
+	health.getSprite().setTextureRect(sf::IntRect(128, 32, 32, 32));
 }
 
 void Stage::processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) {
 	mainPlayer.processInput(keyboardInput, joystickInput);
 }
 
-bool Stage::update() {
+int Stage::update() {
 	checkCollision();
 	mainPlayer.update();
 
@@ -83,8 +92,8 @@ bool Stage::update() {
 		beholder->update();
 	}
 
-	if (mainPlayer.getHealth() <= 0) { return false; }
-	return true;
+	if (mainPlayer.getHealth() <= 0) { return -1; }
+	return ;
 }
 
 void Stage::render() {
@@ -98,6 +107,11 @@ void Stage::render() {
 			grid.getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>(y * gridY)));
 			window->draw(grid.getSprite());
 		}
+	}
+
+	for (int i = 0; i < mainPlayer.getHealth(); ++i) {
+		health.getSprite().setPosition(sf::Vector2f(i * (gridX + 16), 448));
+		window->draw(health.getSprite());
 	}
 
 	for (const auto& floor : floors) {

@@ -30,15 +30,16 @@ private:
 	std::vector<FloorUptr> floors;
 	std::vector<BeholderUptr> beholders;
 	Object grid;
+	Object health;
 	MainPlayer mainPlayer;
 
 	void checkCollision();
 	void interpretStagePattern(const std::string* pattern);
 public:
-	Stage(sf::RenderWindow* window, const std::string* pattern);
+	Stage(sf::RenderWindow* window, const int stageCounter);
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) override;
-	bool update() override;
+	int update() override;
 	void render() override;
 };
 

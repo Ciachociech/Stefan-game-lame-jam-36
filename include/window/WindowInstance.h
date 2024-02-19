@@ -28,6 +28,7 @@ private:
 	game::Gameover gameover;
 
 	int waitFrames = 0;
+	int stageCounter = 1;
 public:
 	WindowInstance(int width, int height, std::string name);
 

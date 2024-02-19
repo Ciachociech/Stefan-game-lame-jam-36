@@ -27,6 +27,34 @@ std::string pattern1[13] = { "SSSSSBSSSBSSSBSSSBSSSSSSS",
 							 "..R.....R.....R.....R....",
 							 "GGGGGGGGGGGGGGGGGGGGGGGGG" };
 
+std::string pattern2[13] = { "BSBSBSBSSSSBSSBSSBSSBSSBS",
+							 ".......S.................",
+							 ".......S.................",
+							 "...S...S.............S...",
+							 "...S...S...F.........S..."
+							 "...S...SBSSBSSBSSBSSBS...",
+							 "...S.....................",
+							 "...S.....................",
+							 "...SBSSBSSBSSBSSBSSBSSSSS",
+							 ".........................",
+							 ".........................",
+							 ".........................",
+							 "GGGGGGGGGGGGGGGGGGGGGGGGG" };
+
+std::string pattern3[13] = { "SSSSSSSBSBSBSBSBSBSSBSSBS",
+							 ".....S.............S.....",
+							 "B.BS.S.............S.....",
+							 "...S.S......S......S.S...",
+							 "...S.SB.B.B.S.B.B.BS.S..."
+							 "...S.S......S......S.S...",
+							 ".B.S.S......S......S.S...",
+							 "...S.S......S......S.S...",
+							 "...S.S.B.B.BSB.B.B.S.S...",
+							 "...S.S......S......S.S...",
+							 ".F.S........S......S.S...",
+							 "...S........S........S...",
+							 "GGGGGGGGGGGGGGGGGGGGGGGGG" };
+
 std::string emptyPattern[13] = { ".........................",
 								 ".........................",
 								 ".........................",
