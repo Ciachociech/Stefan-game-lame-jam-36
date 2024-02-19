@@ -16,14 +16,14 @@ void Stage::checkCollision() {
 		if (mainPlayer.getHitbox().intersects(beholder->getHitbox())) {
 			sound.play();
 			mainPlayer.setHealth(mainPlayer.getHealth() - 1);
-			mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
+			mainPlayer.getSprite().setPosition(sf::Vector2f(704, 384));
 		}
 		if (!beholder->getIsRayActive()) { continue; }
 		for (const auto& beholderRay : beholder->getRayHitboxes()) {
 			if (mainPlayer.getHitbox().intersects(beholderRay)) {
 				sound.play();
 				mainPlayer.setHealth(mainPlayer.getHealth() - 1);
-				mainPlayer.getSprite().setPosition(sf::Vector2f(700, 384));
+				mainPlayer.getSprite().setPosition(sf::Vector2f(704, 384));
 			}
 		}
 	}
@@ -79,7 +79,7 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 }
 
 Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel"), finishTile(),
-																 sound("sound"), soundDamage("assets/audio/damage.wav"), soundDefeat("assets/audio/defeat.wav") {
+																 sound("sound"), soundDamage("assets/audio/damage.wav"), soundDefeat("assets/audio/defeat.wav"), soundUniversal("assets/audio/universal.wav") {
 	switch (stageCounter) {
 		case 1: defualt: {
 			interpretStagePattern(pattern1);

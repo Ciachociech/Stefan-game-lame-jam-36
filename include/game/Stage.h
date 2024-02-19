@@ -41,6 +41,7 @@ private:
 	audio::Sound sound;
 	audio::SoundBuffer soundDamage;
 	audio::SoundBuffer soundDefeat;
+	audio::SoundBuffer soundUniversal;
 
 	drawable::Text textLevel;
 	drawable::Text textHealth;

@@ -199,6 +199,7 @@
     <Media Include="assets\audio\complete.wav" />
     <Media Include="assets\audio\damage.wav" />
     <Media Include="assets\audio\defeat.wav" />
+    <Media Include="assets\audio\universal.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

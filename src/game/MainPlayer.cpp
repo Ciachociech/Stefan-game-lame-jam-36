@@ -8,7 +8,7 @@ namespace game {
 
 MainPlayer::MainPlayer() : SolidObject("MainPlayer", "assets/sprites/concept-asset.png"), velocity(0.f, 0.f), health(5) {
 	sprite = &SolidObject::getSprite();
-	sprite->setPosition(sf::Vector2f(700, 384));
+	sprite->setPosition(sf::Vector2f(704, 384));
 	sprite->setTextureRect(sf::IntRect(128, 0, 32, 32));
 
 	setHitbox(sprite->getGlobalBounds());

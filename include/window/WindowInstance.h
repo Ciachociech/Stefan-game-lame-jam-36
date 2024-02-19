@@ -33,6 +33,7 @@ private:
 
 	audio::Sound sound;
 	audio::SoundBuffer soundComplete;
+	audio::SoundBuffer soundUniversal;
 
 	int waitFrames = 0;
 	int stageCounter = 1;

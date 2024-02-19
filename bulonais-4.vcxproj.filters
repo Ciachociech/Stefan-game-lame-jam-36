@@ -203,5 +203,8 @@
     <Media Include="assets\audio\defeat.wav">
       <Filter>Pliki zasobów\audio</Filter>
     </Media>
+    <Media Include="assets\audio\universal.wav">
+      <Filter>Pliki zasobów\audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>
