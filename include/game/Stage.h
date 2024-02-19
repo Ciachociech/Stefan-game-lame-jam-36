@@ -35,7 +35,7 @@ private:
 	void checkCollision();
 	void interpretStagePattern(const std::string* pattern);
 public:
-	Stage(sf::RenderWindow* window);
+	Stage(sf::RenderWindow* window, const std::string* pattern);
 
 	void processInput(const std::vector<window::PressedKey>& keyboardInput, const std::vector<window::PressedButton>& joystickInput) override;
 	bool update() override;

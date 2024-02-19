@@ -5,7 +5,7 @@
 
 namespace game {
 
-enum class FloorType { normal, edge, none };
+enum class FloorType { stone, grass, brick, none };
 
 class Floor : public SolidObject {
 private:

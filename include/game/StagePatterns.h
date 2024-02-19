@@ -1,5 +1,5 @@
-#ifndef GAME_STAGEPATTERNS_H_
-#define GAME_STAGEPATTERNS_H_
+#ifndef GAME_STAGEPATTESNS_H_
+#define GAME_STAGEPATTESNS_H_
 
 #include <string>
 
@@ -7,22 +7,25 @@ namespace game {
 
 // Legend:
 // . - empty
-// X - floor (normal)
-// E - floor (edge)
+// S - floor (stone)
+// G - floor (grass)
+// R - floor (brick)
+// B - beholder location
+// F - finish location
 
-std::string pattern1[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
+std::string pattern1[13] = { "SSSSSBSSSBSSSBSSSBSSSSSSS",
 							 ".........................",
+							 "..F......................",
 							 ".........................",
+							 "SSSSSSSSSSSSSSSSSSSSS..SS",
 							 ".........................",
-							 "XXXXXXXXXXXXXXXXXXXXE..EX",
+							 "....R.....R....R....R....",
 							 ".........................",
+							 "..SSSSSSSSSSSSSSSSSSSSSSS",
+							 ".....R.....R.....R.......",
 							 ".........................",
-							 ".........................",
-							 "..EXXXXXXXXXXXXXXXXXXXXXX",
-							 ".........................",
-							 ".........................",
-							 ".........................",
-							 "XXXXXXXXXXXXXXXXXXXXXXXXX" };
+							 "..R.....R.....R.....R....",
+							 "GGGGGGGGGGGGGGGGGGGGGGGGG" };
 
 std::string emptyPattern[13] = { ".........................",
 								 ".........................",
@@ -38,34 +41,34 @@ std::string emptyPattern[13] = { ".........................",
 								 ".........................",
 								 "........................." };
 
-std::string templatePattern[13] = { "XXXXXXXXXXXXXXXXXXXXXXXXX",
+std::string templatePattern[13] = { "SSSSSSSSSSSSSSSSSSSSSSSSS",
 									".........................",
 									".........................",
 									".........................",
-									"XXXXXXXXXXXXXXXXXXXXXXXXX",
+									"SSSSSSSSSSSSSSSSSSSSSSSSS",
 									".........................",
 									".........................",
 									".........................",
-									"XXXXXXXXXXXXXXXXXXXXXXXXX",
+									"SSSSSSSSSSSSSSSSSSSSSSSSS",
 									".........................",
 									".........................",
 									".........................",
-									"XXXXXXXXXXXXXXXXXXXXXXXXX" };
+									"SSSSSSSSSSSSSSSSSSSSSSSSS" };
 
 std::string stefanPattern[13] = { ".........................",
-								  "XXX.XXX.XXX.XXX.XXX.XX..X",
-								  "X....X..X...X...X.X.XX..X",
-								  "XXX..X..XXX.XXX.XXX.X.X.X",
-								  "..X..X..X...X...X.X.X..XX",
-								  "XXX..X..XXX.X...X.X.X..XX",
+								  "SSS.SSS.SSS.SSS.SSS.SS..S",
+								  "S....S..S...S...S.S.SS..S",
+								  "SSS..S..SSS.SSS.SSS.S.S.S",
+								  "..S..S..S...S...S.S.S..SS",
+								  "SSS..S..SSS.S...S.S.S..SS",
 								  ".........................",
-								  "XXX.XXX.XXX.XXX.XXX.XX..X",
-								  "X....X..X...X...X.X.XX..X",
-								  "XXX..X..XXX.XXX.XXX.X.X.X",
-								  "..X..X..X...X...X.X.X..XX",
-								  "XXX..X..XXX.X...X.X.X..XX",
+								  "SSS.SSS.SSS.SSS.SSS.SS..S",
+								  "S....S..S...S...S.S.SS..S",
+								  "SSS..S..SSS.SSS.SSS.S.S.S",
+								  "..S..S..S...S...S.S.S..SS",
+								  "SSS..S..SSS.S...S.S.S..SS",
 								  "........................." };
 
 }
 
-#endif // !GAME_STAGEPATTERNS_H_
+#endif // !GAME_STAGEPATTESNS_H_

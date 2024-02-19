@@ -1,5 +1,7 @@
 #include <window/WindowInstance.h>
 
+#include <game/StagePatterns.h>
+
 namespace window {
 	
 WindowInstance::WindowInstance(int width, int height, std::string name) : window(sf::VideoMode(width, height), name), state(ProgramState::none), stage(), gameover(&window) {
@@ -36,7 +38,7 @@ int WindowInstance::loop() {
             */
             case ProgramState::none: {
                 state = ProgramState::stage;
-                stage = std::make_unique<game::Stage>(&window);
+                stage = std::make_unique<game::Stage>(&window, game::pattern1);
                 break;
             }
             case ProgramState::stage: {

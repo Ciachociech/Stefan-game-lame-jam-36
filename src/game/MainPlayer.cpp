@@ -61,11 +61,18 @@ void MainPlayer::processInput(const std::vector<window::PressedKey>& keyboardInp
 }
 
 void MainPlayer::update() {
-	sprite->setPosition(sf::Vector2f(sprite->getPosition().x + predictedMovement.x, sprite->getPosition().y + predictedMovement.y));
+	sprite->setPosition(sf::Vector2f((int) (sprite->getPosition().x + predictedMovement.x), (int) (sprite->getPosition().y + predictedMovement.y)));
 	predictedMovement = sf::Vector2f(0, 0);
 
-	velocity.x *= 0.8;
-	velocity.y *= 0.8;
+	if (getHitbox().left < 0) {
+		getSprite().setPosition(sf::Vector2f(0, getSprite().getPosition().y));
+	}
+	else if (getHitbox().left + getHitbox().width > 800) {
+		getSprite().setPosition(sf::Vector2f(800 - getHitbox().width, getSprite().getPosition().y));
+	}
+
+	velocity.x *= 0;
+	velocity.y *= 0;
 
 	setHitbox(sprite->getGlobalBounds());
 	if (invinsibilityFrames > 0) {
@@ -87,7 +94,7 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox, Floor
 		velocity.y = 0.f;
 	}
 	else if (predictedHitbox.top + predictedHitbox.height > wallHitbox.top) {
-		predictedMovement.y = 0.f;
+		predictedMovement.y = -0.f;
 		velocity.y = 0.f;
 	}
 
@@ -96,7 +103,7 @@ void MainPlayer::resolveCollisionWithWall(const sf::FloatRect& wallHitbox, Floor
 		velocity.x = 0.f;
 	}
 	else if (predictedHitbox.left + predictedHitbox.width > wallHitbox.left) {
-		predictedMovement.x = 0.f;
+		predictedMovement.x = -0.f;
 		velocity.x = 0.f;
 	}
 }
