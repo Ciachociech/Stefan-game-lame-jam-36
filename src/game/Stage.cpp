@@ -25,6 +25,8 @@ void Stage::checkCollision() {
 			}
 		}
 	}
+
+	if (mainPlayer.getHitbox().intersects(finishTile.getHitbox())) { isStageCompleted = true; }
 }
 
 void Stage::interpretStagePattern(const std::string* pattern) {
@@ -61,6 +63,11 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 					beholders.push_back(std::make_unique<Beholder>(++beholderCounter, sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY))));
 					break;
 				}
+				case 'F': {
+					finishTile.getSprite().setPosition(sf::Vector2f(static_cast<float>(x * gridX), static_cast<float>((y + 1) * gridY)));
+					finishTile.update();
+					break;
+				}
 				default: {
 					break;
 				}
@@ -69,7 +76,7 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 	}
 }
 
-Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel") {
+Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel"), finishTile() {
 	switch (stageCounter) {
 		case 1: defualt: {
 			interpretStagePattern(pattern1);
@@ -151,6 +158,8 @@ void Stage::render() {
 			window->draw(beholder->getRaySprite(), sf::RenderStates(sf::BlendAdd));
 		}
 	}
+
+	window->draw(finishTile.getSprite());
 
 	if (mainPlayer.getInvinsibilityFrames() % 10 < 5) {
 		window->draw(mainPlayer.getSprite());

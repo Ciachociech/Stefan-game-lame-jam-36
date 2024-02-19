@@ -19,7 +19,7 @@ private:
 
 	sf::Font font;
 
-	int waitForInput = 30;
+	int waitForInput = 120;
 	bool isAnyInput = false;
 public:
 	Gameover(sf::RenderWindow* window);

@@ -47,7 +47,9 @@ int WindowInstance::loop() {
                             stage.reset();
                             stage = std::make_unique<game::Stage>(&window, ++stageCounter);
                         }
-                        state = ProgramState::gameover;
+                        else {
+                            state = ProgramState::gameover;
+                        }
                         break;
                     }
                     case -1: {
@@ -61,6 +63,7 @@ int WindowInstance::loop() {
                 gameover.processInput(keyboardInput, joystickInput);
                 if (gameover.update()) {
                     stage.reset();
+                    stageCounter = 1;
                     state = ProgramState::none;
                 }
                 if (stage) { stage->render(); }

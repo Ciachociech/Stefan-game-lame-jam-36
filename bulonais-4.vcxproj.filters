@@ -93,6 +93,9 @@
     <ClCompile Include="src\game\Gameover.cpp">
       <Filter>Pliki źródłowe\game</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\Finish.cpp">
+      <Filter>Pliki źródłowe\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\window\JoystickInput.h">
@@ -149,11 +152,11 @@
     <ClInclude Include="include\game\Gameover.h">
       <Filter>Pliki nagłówkowe\game</Filter>
     </ClInclude>
+    <ClInclude Include="include\game\Finish.h">
+      <Filter>Pliki nagłówkowe\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\sprites\stefan-head2.png">
-      <Filter>Pliki zasobów\sprites</Filter>
-    </Image>
     <Image Include="assets\sprites\grid-part.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
@@ -163,7 +166,10 @@
     <Image Include="assets\sprites\beholder-ray.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
-    <Image Include="assets\sprites\stone-test.png">
+    <Image Include="assets\sprites\finish.png">
+      <Filter>Pliki zasobów\sprites</Filter>
+    </Image>
+    <Image Include="assets\sprites\concept-asset.png">
       <Filter>Pliki zasobów\sprites</Filter>
     </Image>
   </ItemGroup>

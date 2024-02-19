@@ -12,6 +12,7 @@
 #include <drawable/Text.h>
 #include <drawable/Texture.h>
 #include <game/Beholder.h>
+#include <game/Finish.h>
 #include <game/Floor.h>
 #include <game/MainPlayer.h>
 #include <game/Object.h>
@@ -33,6 +34,8 @@ private:
 	Object grid;
 	Object health;
 	MainPlayer mainPlayer;
+	Finish finishTile;
+
 	drawable::Text textLevel;
 	drawable::Text textHealth;
 

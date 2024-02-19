@@ -36,10 +36,11 @@ void Gameover::processInput(const std::vector<window::PressedKey>& keyboardInput
 }
 
 int Gameover::update() {
-	if (isAnyInput && waitForInput-- < 0) { 
+	if (waitForInput-- < 0 && isAnyInput) {
 		waitForInput = 30;
 		return 1; 
 	}
+	isAnyInput = false;
 	return 0;
 }
 
@@ -48,7 +49,9 @@ void Gameover::render() {
 	getWindow()->draw(frameOuter);
 	getWindow()->draw(frameInner);
 	getWindow()->draw(textUpper);
-	getWindow()->draw(textLower);
+	if (waitForInput < 0) {
+		getWindow()->draw(textLower);
+	}
 }
 
 }
