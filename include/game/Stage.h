@@ -9,6 +9,7 @@
 #include <game/Scene.h>
 
 #include <drawable/Sprite.h>
+#include <drawable/Text.h>
 #include <drawable/Texture.h>
 #include <game/Beholder.h>
 #include <game/Floor.h>
@@ -32,9 +33,14 @@ private:
 	Object grid;
 	Object health;
 	MainPlayer mainPlayer;
+	drawable::Text textLevel;
+	drawable::Text textHealth;
+
+	sf::Font font;
 
 	void checkCollision();
 	void interpretStagePattern(const std::string* pattern);
+	bool isStageCompleted = false;
 public:
 	Stage(sf::RenderWindow* window, const int stageCounter);
 

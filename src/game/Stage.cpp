@@ -69,13 +69,36 @@ void Stage::interpretStagePattern(const std::string* pattern) {
 	}
 }
 
-Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer() {
+Stage::Stage(sf::RenderWindow* window, const int stageCounter) : Scene(window), floors(), grid("grid", "assets/sprites/grid-part.png"), health("health", "assets/sprites/concept-asset.png"), mainPlayer(), textHealth("textHealth"), textLevel("textLevel") {
 	switch (stageCounter) {
 		case 1: defualt: {
 			interpretStagePattern(pattern1);
 			break;
 		}
+		case 2: {
+			interpretStagePattern(pattern2);
+			break;
+		}
+		case 3: {
+			interpretStagePattern(pattern3);
+			break;
+		}
 	}
+
+	sf::Color lighterStefanColor = sf::Color(180, 161, 151, 255);
+	font.loadFromFile("assets/fonts/NerkoOne-Regular.ttf");
+
+	textHealth.setTextContent(" level: " + std::to_string(stageCounter) + "/3");
+	textHealth.setFont(font);
+	textHealth.setPosition(sf::Vector2f(0, -8));
+	textHealth.setFillColor(lighterStefanColor);
+	textHealth.setCharacterSize(32);
+
+	textLevel.setTextContent("health:");
+	textLevel.setFont(font);
+	textLevel.setPosition(sf::Vector2f(8, 448));
+	textLevel.setFillColor(lighterStefanColor);
+	textLevel.setCharacterSize(32);
 	
 	health.getSprite().setTextureRect(sf::IntRect(128, 32, 32, 32));
 }
@@ -93,7 +116,8 @@ int Stage::update() {
 	}
 
 	if (mainPlayer.getHealth() <= 0) { return -1; }
-	return ;
+	if (isStageCompleted) { return 1; }
+	return 0;
 }
 
 void Stage::render() {
@@ -109,8 +133,11 @@ void Stage::render() {
 		}
 	}
 
+	window->draw(textHealth);
+	window->draw(textLevel);
+
 	for (int i = 0; i < mainPlayer.getHealth(); ++i) {
-		health.getSprite().setPosition(sf::Vector2f(i * (gridX + 16), 448));
+		health.getSprite().setPosition(sf::Vector2f(96 + i * (gridX + 8), 448));
 		window->draw(health.getSprite());
 	}
 
