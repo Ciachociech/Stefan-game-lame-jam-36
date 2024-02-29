@@ -8,3 +8,5 @@ Maybe in the (further than sooner) future, I'll try to finish this project.
 Language: C++\
 Libraries: SFML (Audio, System, Graphics, Window) - version 2.6.0\
 IDE: Visual Studio 2022
+
+Game jam page (where to game is published/supposed to publish): https://itch.io/jam/lame-jam-36
